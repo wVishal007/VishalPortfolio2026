@@ -1,0 +1,14 @@
+@import "tailwindcss";
+body {
+ font-family: "Playwrite NZ Basic", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.icon-glow:hover {
+  filter: drop-shadow(0 0 6px currentColor);
+}

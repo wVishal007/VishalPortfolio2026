@@ -1,0 +1,117 @@
+############################
+# Logs
+############################
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+############################
+# Runtime data
+############################
+pids
+*.pid
+*.seed
+*.pid.lock
+
+############################
+# Dependency directories
+############################
+node_modules/
+jspm_packages/
+
+############################
+# Build outputs
+############################
+dist/
+build/
+dist-ssr/
+out/
+coverage/
+
+############################
+# Environment variables
+############################
+.env
+.env.*
+!.env.example
+
+############################
+# Vite / React / Next
+############################
+.vite/
+.next/
+.vercel/
+
+############################
+# Cache directories
+############################
+.cache/
+.eslintcache
+.parcel-cache
+.turbo/
+
+############################
+# Editor directories and files
+############################
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.code-workspace
+
+############################
+# OS files
+############################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+############################
+# Testing
+############################
+coverage/
+*.lcov
+
+############################
+# Python / ML (PyTorch, Data Science)
+############################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb_checkpoints
+.env/
+venv/
+ENV/
+.venv/
+
+############################
+# Jupyter
+############################
+.ipynb_checkpoints/
+
+############################
+# Docker
+############################
+.dockerignore
+
+############################
+# Firebase
+############################
+.firebase/
+.firebaserc
+
+############################
+# Misc
+############################
+*.local
+*.tmp
+*.bak
