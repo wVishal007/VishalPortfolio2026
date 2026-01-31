@@ -1,5 +1,5 @@
 import React from "react";
-import mypic from "../assets/mypic1.JPG";
+import mypic from "../assets/mypic1.jpg";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 const AboutMe = () => {

@@ -1,23 +1,23 @@
 // IBM
-import aiIbmImg from "../assets/certification-images/ai-ibm.PNG";
+import aiIbmImg from "../assets/certification-images/ai-ibm.png";
 
-import webIbmImg from "../assets/certification-images/web-ibm.PNG";
+import webIbmImg from "../assets/certification-images/web-ibm.png";
 
 // Simplilearn
-import aiSimplilearnImg from "../assets/certification-images/ai-simplilearn.PNG";
+import aiSimplilearnImg from "../assets/certification-images/ai-simplilearn.png";
 
-import dlSimplilearnImg from "../assets/certification-images/dl-simplilearn.PNG";
+import dlSimplilearnImg from "../assets/certification-images/dl-simplilearn.png";
 
-import dsaPythonImg from "../assets/certification-images/dsa-python-simplilearn.PNG";
+import dsaPythonImg from "../assets/certification-images/dsa-python-simplilearn.png";
 
-import mernImg from "../assets/certification-images/mern-simplilearn.PNG";
+import mernImg from "../assets/certification-images/mern-simplilearn.png";
 
-import pytorchImg from "../assets/certification-images/pytorch-simplilearn.PNG";
+import pytorchImg from "../assets/certification-images/pytorch-simplilearn.png";
 
-import typescriptImg from "../assets/certification-images/typescript-simplilearn.PNG";
+import typescriptImg from "../assets/certification-images/typescript-simplilearn.png";
 
 // TechGyan
-import mlTechgyanImg from "../assets/certification-images/ml-techgyan.PNG";
+import mlTechgyanImg from "../assets/certification-images/ml-techgyan.png";
 
 
 export const certificates = [

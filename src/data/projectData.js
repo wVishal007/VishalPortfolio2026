@@ -1,7 +1,7 @@
-import TH_INSTA from '../assets/project/instagram-clone/1.PNG'
-import TH_ECOMMERCE from '../assets/project/ecommerce-site/1.PNG'
-import TH_ANIME from '../assets/project/anime-recommendation/1.PNG'
-import TH_ML_SUITE from '../assets/project/ml-lab/1.PNG' // add thumbnail
+import TH_INSTA from '../assets/project/instagram-clone/1.png'
+import TH_ECOMMERCE from '../assets/project/ecommerce-site/1.png'
+import TH_ANIME from '../assets/project/anime-recommendation/1.png'
+import TH_ML_SUITE from '../assets/project/ml-lab/1.png' // add thumbnail
 
 export const projects = [
   {
