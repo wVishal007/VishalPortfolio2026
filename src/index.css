@@ -12,3 +12,7 @@ html {
 .icon-glow:hover {
   filter: drop-shadow(0 0 6px currentColor);
 }
+/* hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}

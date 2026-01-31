@@ -17,11 +17,25 @@ const ProjectsSection = () => {
       </div>
 
       {/* Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {projects.map((project, index) => (
-          <ProjectCard key={index} {...project} />
-        ))}
-      </div>
+     <div className="
+  max-w-7xl mx-auto
+  flex gap-6 overflow-x-auto pb-4
+  md:grid md:grid-cols-2
+  lg:grid-cols-3
+  md:gap-10
+  md:overflow-visible
+  scroll-smooth snap-x snap-mandatory
+">
+  {projects.map((project, index) => (
+    <div
+      key={index}
+      className="min-w-[90%] snap-center
+ sm:min-w-[80%] md:min-w-0"
+    >
+      <ProjectCard {...project} />
+    </div>
+  ))}
+</div>
     </section>
   );
 };
