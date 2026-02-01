@@ -27,7 +27,7 @@ const Navbar = () => {
           className="text-2xl font-extrabold cursor-pointer"
           onClick={() => handleNavigate("/about-me")}
         >
-          Vishal<span className="text-blue-400">.</span>
+          Vishal's Portfolio<span className="text-blue-400">.</span>
         </div>
 
         {/* Desktop Menu */}
