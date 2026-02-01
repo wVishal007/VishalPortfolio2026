@@ -5,7 +5,7 @@ const HobbyCard = ({
   tags,
 }) => {
   return (
-    <div className="group relative rounded-3xl overflow-hidden bg-gradient-to-br from-purple-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500">
+    <div className="group hoverglow relative rounded-3xl overflow-hidden bg-gradient-to-br from-purple-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500">
       
       {/* Image */}
       <div className="relative h-52 overflow-hidden">

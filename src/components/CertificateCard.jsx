@@ -8,7 +8,7 @@ const CertificateCard = ({ title, provider, image, credentialUrl }) => {
   return (
     <>
       {/* Card */}
-      <div className="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-blue-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500">
+      <div className="group hoverglow relative rounded-2xl overflow-hidden bg-gradient-to-br from-blue-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500">
         
         {/* Clickable Image */}
         <div

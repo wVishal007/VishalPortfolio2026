@@ -1,6 +1,6 @@
 const SkillRow = ({ title, level, icon, gradient }) => {
   return (
-    <div className="group relative overflow-hidden rounded-xl bg-black/60 border border-white/10 hover:border-white/30 transition-all duration-300">
+    <div className="group hoverglow relative overflow-hidden rounded-xl bg-black/60 border border-white/10 hover:border-white/30 transition-all duration-300">
       
       {/* Gradient Accent */}
       <div

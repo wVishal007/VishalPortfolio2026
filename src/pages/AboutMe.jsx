@@ -83,7 +83,7 @@ const AboutMe = () => {
             <img
               src={mypic}
               alt="Vishal"
-              className=" hue-rotate-320 brightness-130 relative rounded-full object-cover w-72 h-72 md:w-136 md:h-136 border-4 border-gray-700 group-hover:border-green-400 shadow-lg transition-all duration-500 ease-in-out transform group-hover:scale-105 group-hover:rotate-2"
+              className=" hoverglow hue-rotate-320 brightness-130 relative rounded-full object-cover w-72 h-72 md:w-136 md:h-136 border-4 border-gray-700 group-hover:border-green-400 shadow-lg transition-all duration-500 ease-in-out transform group-hover:scale-105 group-hover:rotate-2"
             />
           </div>
         </div>
