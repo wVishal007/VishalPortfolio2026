@@ -9,7 +9,9 @@ function App() {
     { path: "about-me" },
     { path: "skills" },
     { path: "projects" },
-    { path: "certifications" }
+    { path: "certifications" },
+    { path: "Hobbies" },
+    { path: "Achievements" },
   ]
 }])
 

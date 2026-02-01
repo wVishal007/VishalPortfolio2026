@@ -11,6 +11,7 @@ const Navbar = () => {
     { title: "Skills", path: "/skills" },
     { title: "Projects", path: "/projects" },
     { title: "Certifications", path: "/certifications" },
+    { title: "Achievements", path: "/Achievements" },
   ];
 
   const handleNavigate = (path) => {

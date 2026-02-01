@@ -9,7 +9,7 @@ const AboutMe = () => {
       {/* //part-1 */}
       <div className="flex flex-col-reverse md:flex-row w-screen min-h-screen bg-gradient-to-br from-blue-800 via-black to-blue-950 text-white items-center justify-center px-10 py-20 md:px-20">
         {/* 🟩 Left: Text Section */}
-        <div className="border-r border-white p-2 md:p-10 w-full md:w-1/2 flex flex-col justify-center items-center md:items-start  text-center md:text-left space-y-6">
+        <div className="md:border-r border-white p-2 md:p-10 w-full md:w-1/2 flex flex-col justify-center items-center md:items-start  text-center md:text-left space-y-6">
          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
   Hi, I’m <span className="text-white">Vishal Singh</span>
 </h1>

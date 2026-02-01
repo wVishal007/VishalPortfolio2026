@@ -7,6 +7,9 @@ import SkillsSection from "./Skills";
 import ProjectsSection from "./ProjectSection";
 import CertificatesSection from "./CertificationSection";
 import Footer from "../components/Footer";
+import { Analytics } from "@vercel/analytics/react"
+import HobbiesSection from "./HobbieSection";
+import AchievementsSection from "./AchievementSection";
 
 const HomePage = () => {
   const location = useLocation();
@@ -15,6 +18,8 @@ const HomePage = () => {
   const skillsRef = useRef(null);
   const projectsRef = useRef(null);
   const certRef = useRef(null);
+  const HobbyRef = useRef(null);
+  const AchieveRef = useRef(null);
 
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/about-me") {
@@ -29,11 +34,18 @@ const HomePage = () => {
     if (location.pathname === "/certifications") {
       certRef.current?.scrollIntoView({ behavior: "smooth" });
     }
+    if (location.pathname === "/Hobbies") {
+      HobbyRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+    if (location.pathname === "/Achievements") {
+      AchieveRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [location.pathname]);
 
   return (
     <div className="w-screen max-w-screen">
       <Navbar />
+      <Analytics/>
 
       <section ref={aboutRef}>
         <AboutMe />
@@ -50,6 +62,15 @@ const HomePage = () => {
       <section ref={certRef}>
         <CertificatesSection />
       </section>
+
+      <section ref={AchieveRef}>
+        <AchievementsSection/>
+      </section>
+
+      <section ref={HobbyRef}>
+        <HobbiesSection/>
+      </section>
+
       <Footer/>
     </div>
   );
