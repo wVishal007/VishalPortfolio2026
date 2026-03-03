@@ -7,7 +7,7 @@ const ProjectCard = ({
   live,
 }) => {
   return (
-    <div className="group hoverglow relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500">
+    <div className="group hoverglow relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500 flex flex-col h-full">
       
       {/* Image */}
       <div className="relative h-52 overflow-hidden">
@@ -20,25 +20,27 @@ const ProjectCard = ({
       </div>
 
       {/* Content */}
-      <div className="p-6 space-y-4">
-        <h3 className="text-xl font-bold text-white">
-          {title}
-        </h3>
+      <div className="p-6 flex flex-col flex-1 justify-between">
+        <div className="space-y-4">
+          <h3 className="text-xl font-bold text-white">
+            {title}
+          </h3>
 
-        <p className="text-gray-400 text-sm leading-relaxed">
-          {description}
-        </p>
+          <p className="text-gray-400 text-sm leading-relaxed line-clamp-5">
+            {description}
+          </p>
 
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-2 text-xs">
-          {tech.map((item, index) => (
-            <span
-              key={index}
-              className="px-2 py-1 rounded-full bg-white/10 text-gray-300"
-            >
-              {item}
-            </span>
-          ))}
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-2 text-xs">
+            {tech.map((item, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 rounded-full bg-white/10 text-gray-300"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Links */}

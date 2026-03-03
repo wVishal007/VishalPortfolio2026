@@ -2,6 +2,8 @@
 import aiIbmImg from "../assets/certification-images/ai-ibm.png";
 
 import webIbmImg from "../assets/certification-images/web-ibm.png";
+import aiAgentIbmImg from "../assets/certification-images/ai-agent.png";
+import ragIbmImg from "../assets/certification-images/rag.png";
 
 // Simplilearn
 import aiSimplilearnImg from "../assets/certification-images/ai-simplilearn.png";
@@ -21,6 +23,18 @@ import mlTechgyanImg from "../assets/certification-images/ml-techgyan.png";
 
 
 export const certificates = [
+  {
+    title: "Make Agentic AI Work for You",
+    provider: "IBM",
+    image: aiAgentIbmImg,
+    credentialUrl: "https://www.credly.com/badges/8200c8aa-ae72-460e-b995-6e924a4b7ab8/public_url",
+  },
+  {
+    title: "Retrieval-Augmented Generation for Enhanced AI Outputs",
+    provider: "IBM",
+    image: ragIbmImg,
+    credentialUrl: "https://www.credly.com/badges/038f3907-aa96-41ae-b141-0d00ac580525/public_url",
+  },
   {
     title: "AI Fundamentals: Foundations for Understanding AI",
     provider: "IBM",
