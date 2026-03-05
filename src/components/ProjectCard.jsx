@@ -1,73 +1,78 @@
-const ProjectCard = ({
-  title,
-  description,
-  image,
-  tech,
-  github,
-  live,
-}) => {
+import React from "react";
+import { Github, ArrowUpRight } from "lucide-react";
+
+/**
+ * COMPONENT: ProjectCard
+ * STYLE: Editorial Row with Lavender Accents
+ */
+const ProjectCard = ({ title, description, image, tech, github, live }) => {
   return (
-    <div className="group hoverglow relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500 flex flex-col h-full">
+    <div className="group relative bg-[#0a0a0a] border-b border-white/5 hover:bg-[#111] transition-all duration-700 flex flex-col md:flex-row gap-8 py-12 px-4 overflow-hidden">
       
-      {/* Image */}
-      <div className="relative h-52 overflow-hidden">
+      {/* Visual: Grayscale-to-Color Image */}
+      <div className="relative w-full md:w-1/3 aspect-video overflow-hidden rounded-sm bg-[#1e1e1e]">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#0a0a0a] via-transparent to-transparent opacity-60"></div>
       </div>
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-1 justify-between">
+      {/* Content Side */}
+      <div className="flex-1 flex flex-col justify-between">
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-white">
-            {title}
-          </h3>
+          <div className="flex items-start justify-between">
+            <h3 className="text-3xl md:text-5xl font-black text-white tracking-[-0.03em] uppercase leading-none">
+              {title}
+            </h3>
+            {live && (
+              <a 
+                href={live} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white/20 hover:text-[#E6E6FA] transition-colors p-2"
+              >
+                <ArrowUpRight size={32} />
+              </a>
+            )}
+          </div>
 
-          <p className="text-gray-400 text-sm leading-relaxed line-clamp-5">
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-xl font-medium">
             {description}
           </p>
 
-          {/* Tech stack */}
-          <div className="flex flex-wrap gap-2 text-xs">
+          {/* Minimalist Tech Tags */}
+          <div className="flex flex-wrap gap-x-6 gap-y-2 pt-2">
             {tech.map((item, index) => (
               <span
                 key={index}
-                className="px-2 py-1 rounded-full bg-white/10 text-gray-300"
+                className="text-[#E6E6FA] text-[10px] font-black uppercase tracking-[0.2em] opacity-40 group-hover:opacity-100 transition-opacity"
               >
-                {item}
+                // {item}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Links */}
-        <div className="flex gap-4 pt-4">
+        {/* Action Bar */}
+        <div className="flex gap-8 pt-8 items-center">
           {github && (
             <a
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-full bg-white/10 text-white text-sm hover:bg-white/20 transition"
+              className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 hover:text-white transition-all flex items-center gap-2"
             >
-              GitHub
+              <Github size={14} /> Source Code
             </a>
           )}
-
-          {live && (
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-black text-sm font-semibold hover:scale-105 transition"
-            >
-              Live Demo
-            </a>
-          )}
+          <div className="h-px flex-1 bg-white/5 group-hover:bg-[#E6E6FA]/20 transition-all duration-700"></div>
         </div>
       </div>
+      
+      {/* Background Accent on Hover */}
+      <div className="absolute -z-10 top-0 left-0 w-full h-full bg-[#E6E6FA]/[0.02] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
     </div>
   );
 };
