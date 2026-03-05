@@ -4,20 +4,21 @@ import { skills } from "../data/skillData";
 
 const SkillsSection = () => {
   return (
-    <section className="w-full py-20 px-6 bg-gradient-to-bl from-blue-950 via-black to-blue-900">
+    <section className="w-full py-20 px-6 bg-[#1e1e1e]">
       
-      {/* Heading */}
-      <div className="max-w-7xl mx-auto mb-16">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-white">
-          My <span className="text-green-400">Skills</span>
+      {/* Heading - Centered and Bold like the reference */}
+      <div className="max-w-7xl mx-auto mb-20 text-center">
+        <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase">
+          My <span className="text-[#fd6f00]">Skills</span>
         </h2>
-        <p className="mt-4 text-gray-400">
-          Skills I’ve sharpened through real projects, freelancing, hackathons, and constant learning.
+        <div className="w-24 h-1.5 bg-[#fd6f00] mx-auto mt-4 rounded-full"></div>
+        <p className="mt-6 text-gray-400 max-w-2xl mx-auto text-lg">
+          Skills I’ve sharpened through real projects, freelancing, and constant learning in AI and Web.
         </p>
       </div>
 
-      {/* Skill Streams */}
-      <div className="max-w-7xl mx-auto flex flex-col gap-6">
+      {/* Skill Grid - Changed to a grid for better scannability */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {skills.map((skill, index) => (
           <SkillRow key={index} {...skill} />
         ))}

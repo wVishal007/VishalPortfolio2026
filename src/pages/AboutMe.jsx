@@ -1,137 +1,126 @@
 import React from "react";
 import mypic from "../assets/mypic-2.jpg";
-import { Github, Linkedin, Mail } from "lucide-react";
-
-const skills = [
-  "Full-Stack Dev", "MERN Stack", "Machine Learning", "Deep Learning (PyTorch)",
-  "LangChain & Agentic AI", "RAG & LLMs", "Next.js & React", "Node.js & Express",
-  "MongoDB", "Tailwind CSS"
-];
+import { Github, Linkedin, Mail, Terminal, Cpu, Code2, Sparkles } from "lucide-react";
 
 const AboutMe = () => {
+  const techStack = [
+    { name: "Agentic AI", color: "text-[#fd6f00]" },
+    { name: "LLMs & RAG", color: "text-white" },
+    { name: "LangChain", color: "text-[#fd6f00]" },
+    { name: "PyTorch", color: "text-white" },
+    { name: "MERN Stack", color: "text-[#fd6f00]" },
+    { name: "Next.js", color: "text-white" },
+    { name: "TypeScript", color: "text-[#fd6f00]" },
+  ];
+
   return (
-    <div className="relative flex flex-col bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white overflow-hidden">
-
-      {/* Ambient Orbs */}
-      <div className="absolute top-10 left-10 w-64 h-64 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl opacity-15 animate-slow-pulse"></div>
-      <div className="absolute bottom-20 right-16 w-96 h-96 bg-gradient-to-r from-green-400 to-cyan-500 rounded-full blur-3xl opacity-10 animate-slow-pulse"></div>
-
-      {/* Hero Section */}
-      <div className="flex flex-col-reverse md:flex-row w-full min-h-screen items-center justify-center px-10 py-20 md:px-20 relative z-10">
-
-        {/* Left Text Section */}
-        <div className="md:border-r border-white/20 p-4 md:p-10 w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-6">
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 animate-text-shimmer">
-            Hi, I’m <span className="text-white">Vishal Singh</span>
-          </h1>
-
-          <h2 className="mt-2 text-xl md:text-2xl font-semibold text-gray-300">
-            AI & Full-Stack Developer • LLM / RAG Enthusiast
-          </h2>
-
-          <p className="mt-4 text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed">
-            I craft <span className="text-cyan-400 font-semibold">intelligent web apps</span>, 
-            <span className="text-blue-400 font-semibold"> agentic AI systems</span>, and 
-            integrate <span className="text-purple-400 font-semibold">LLMs & RAG pipelines</span> 
-            to solve real-world problems efficiently.
-            <br /><br />
-            From <span className="font-semibold">data preprocessing</span> and 
-            <span className="font-semibold"> neural network design</span> with 
-            <span className="text-red-400 font-semibold"> PyTorch</span>, to 
-            building modern full-stack solutions using 
-            <span className="text-blue-400 font-semibold"> React</span>, 
-            <span className="text-green-400 font-semibold"> Node.js</span>, 
-            <span className="text-cyan-400 font-semibold"> MongoDB</span>, and 
-            <span className="text-indigo-400 font-semibold"> Tailwind CSS</span>.
-          </p>
-
-          {/* Skills */}
-          <div className="flex flex-wrap gap-3 mt-3">
-            {skills.map((skill, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 text-xs font-medium rounded-xl bg-white/10 backdrop-blur-sm text-gray-100 hover:bg-cyan-500 hover:text-black hover:scale-105 transition-all duration-300"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-
-          {/* Socials */}
-          <div className="flex gap-5 items-center mt-4">
-            <a href="https://github.com/wVishal007" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition cursor-pointer">
-              <Github size={32} />
-            </a>
-            <a href="https://www.linkedin.com/in/vishal-singh-188013324/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition cursor-pointer">
-              <Linkedin size={32} />
-            </a>
-            <a href="mailto:vishalsingh31879@gmail.com" className="hover:text-red-400 transition cursor-pointer">
-              <Mail size={32} />
-            </a>
-          </div>
-
-          <button className="mt-6 px-6 py-3 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-black font-semibold rounded-full shadow-lg hover:shadow-[0_0_20px_rgba(0,255,255,0.4)] hover:scale-105 transition-all duration-300">
-            Let’s Build Futuristic Apps 🚀
-          </button>
-        </div>
-
-        {/* Right Image Section */}
-        <div className="w-full md:w-1/2 flex justify-center mt-10 md:mt-0 relative">
-          {/* Glass Panel */}
-          <div className="absolute inset-0 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 shadow-xl"></div>
-
-          {/* Profile + Floating Skills */}
-          <div className="relative flex justify-center items-center w-full h-full">
-            {/* Floating Skill Tags */}
-            {skills.map((skill, idx) => {
-              const angle = (idx / skills.length) * 360;
-              return (
-                <span
-                  key={idx}
-                  style={{
-                    transform: `rotate(${angle}deg) translate(150px) rotate(-${angle}deg)`
-                  }}
-                  className="absolute px-2 py-1 text-xs font-medium rounded-xl bg-cyan-600/40 text-white backdrop-blur-sm opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-500"
-                >
-                  {skill}
-                </span>
-              )
-            })}
-
-            {/* Profile Image */}
-            <img
-              src={mypic}
-              alt="Vishal"
-              className="relative w-72 h-72 md:w-160 md:h-160 rounded-full border-4 border-gray-700 shadow-2xl object-cover transform transition duration-700 ease-in-out hover:scale-110 hover:rotate-3 hover:brightness-110"
-            />
-          </div>
-        </div>
-
+    <section className="relative min-h-screen bg-[#1e1e1e] text-white py-20 px-6 overflow-hidden">
+      
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#fd6f00] rounded-full blur-[120px]" />
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-white rounded-full blur-[100px]" />
       </div>
 
-      {/* Hobbies / Philosophy */}
-      <div className="py-8 px-6 md:px-20 bg-gradient-to-tr from-gray-900 via-black to-gray-950 relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="w-full md:w-1/2 text-center md:text-left">
-            <p className="text-gray-400 text-base md:text-lg leading-relaxed">
-              Life is more than just coding — it’s about <span className="text-cyan-400 font-semibold">innovating and creating</span>.  
-              Whether designing <span className="text-blue-400 font-semibold">AI systems</span>, 
-              playing <span className="text-purple-400 font-semibold">chess</span>, capturing 
-              <span className="text-indigo-400 font-semibold"> photography</span>, or smashing 
-              a <span className="text-green-400 font-semibold">badminton shuttle</span>, 
-              I strive to stay curious, creative, and bold.
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Main Bento Grid Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          {/* 1. HERO CARD (Main Intro) */}
+          <div className="lg:col-span-8 bg-[#2b2b2b] p-8 md:p-12 rounded-3xl border border-white/5 flex flex-col justify-center space-y-6 shadow-2xl">
+            <div className="flex items-center gap-3 text-[#fd6f00] font-black tracking-[0.3em] uppercase text-xs">
+              <Sparkles size={16} /> 
+              Available for Innovation
+            </div>
+            
+            <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">
+              VISHAL <span className="text-[#fd6f00]">SINGH</span>
+            </h1>
+
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl font-medium">
+              I architect <span className="text-white">Agentic AI systems</span> and <span className="text-white">Full-Stack solutions</span>. 
+              Bridging the gap between <span className="text-[#fd6f00]">Machine Learning</span> and modern web scalability using the MERN stack, Next.js, and LLM orchestration.
             </p>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button className="px-8 py-4 bg-[#fd6f00] text-white font-black uppercase tracking-widest text-sm rounded-xl hover:bg-orange-600 transition-all shadow-lg shadow-orange-900/20 active:scale-95">
+                Download CV
+              </button>
+              <div className="flex gap-3">
+                {[
+                  { icon: <Github />, link: "https://github.com/wVishal007" },
+                  { icon: <Linkedin />, link: "https://linkedin.com/in/vishal-singh-188013324/" },
+                  { icon: <Mail />, link: "mailto:vishalsingh31879@gmail.com" }
+                ].map((social, i) => (
+                  <a key={i} href={social.link} className="p-4 bg-[#1e1e1e] rounded-xl border border-white/5 hover:border-[#fd6f00]/50 hover:text-[#fd6f00] transition-all">
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="w-full md:w-1/2 text-center md:text-right">
-            <blockquote className="italic text-gray-400 text-lg md:text-xl font-light border-l-4 md:border-l-0 md:border-r-4 border-cyan-500 pl-4 md:pr-6">
-              “Every day is an opportunity to innovate, learn, and push the limits of technology.”
-            </blockquote>
+          {/* 2. IMAGE CARD */}
+          <div className="lg:col-span-4 bg-[#2b2b2b] rounded-3xl border border-white/5 overflow-hidden group relative">
+            <img 
+              src={mypic} 
+              alt="Vishal" 
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] via-transparent to-transparent opacity-80" />
+            <div className="absolute bottom-6 left-6">
+              <p className="text-white font-black uppercase tracking-widest text-sm">Based in India</p>
+              <p className="text-[#fd6f00] text-xs font-bold uppercase tracking-widest">GMT +5:30</p>
+            </div>
           </div>
+
+          {/* 3. TECH TERMINAL CARD */}
+          <div className="lg:col-span-5 bg-[#1e1e1e] border border-white/10 rounded-3xl p-8 flex flex-col gap-6 relative group overflow-hidden">
+             <div className="flex items-center gap-2 mb-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                <span className="ml-2 text-[10px] font-bold uppercase tracking-widest text-gray-600">Stack_Debugger</span>
+             </div>
+             
+             <div className="space-y-3">
+                {techStack.map((tech, i) => (
+                  <div key={i} className="flex items-center gap-4 group/item">
+                    <span className="text-gray-700 font-mono text-sm">0{i+1}</span>
+                    <span className={`font-black uppercase tracking-tighter text-xl ${tech.color} group-hover/item:translate-x-2 transition-transform`}>
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+             </div>
+             
+             <Terminal className="absolute -bottom-6 -right-6 text-white opacity-[0.03] rotate-12" size={200} />
+          </div>
+
+          {/* 4. SUMMARY / PHILOSOPHY CARD */}
+          <div className="lg:col-span-7 bg-[#fd6f00] rounded-3xl p-8 md:p-12 text-[#1e1e1e] flex flex-col justify-center relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:rotate-12 transition-transform">
+              <Cpu size={120} />
+            </div>
+            
+            <h3 className="text-3xl font-black uppercase tracking-tighter mb-4">
+              The Philosophy
+            </h3>
+            <p className="text-lg md:text-xl font-bold leading-tight uppercase tracking-tight">
+              I don't just build apps; I build <span className="bg-black text-white px-2">Intelligence</span>. 
+              By combining RAG pipelines with robust MERN architectures, I create software that thinks, adapts, and scales.
+            </p>
+            
+            <div className="mt-8 flex items-center gap-4">
+               <div className="h-px flex-1 bg-black/20" />
+               <span className="text-xs font-black uppercase tracking-[0.3em]">Code • AI • Vision</span>
+            </div>
+          </div>
+
         </div>
       </div>
-
-    </div>
+    </section>
   );
 };
 

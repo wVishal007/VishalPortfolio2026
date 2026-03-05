@@ -16,57 +16,47 @@ const Navbar = () => {
 
   const handleNavigate = (path) => {
     navigate(path);
-    setOpen(false); // close mobile menu
+    setOpen(false);
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-br from-blue-950 via-black to-blue-950 text-white shadow-md">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+    <header className="fixed top-0 left-0 w-full z-50 bg-[#1e1e1e] text-white">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
         
-        {/* Logo */}
-        <div
-          className="text-2xl font-extrabold cursor-pointer"
-          onClick={() => handleNavigate("/about-me")}
-        >
-          Vishal's Portfolio<span className="text-blue-400">.</span>
+        {/* Logo Style from Reference */}
+        <div className="text-2xl font-bold cursor-pointer tracking-tighter" onClick={() => handleNavigate("/about-me")}>
+          <span className="text-[#fd6f00]">V</span>ISHAL
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 text-lg font-medium">
+        <ul className="hidden md:flex gap-10 text-sm font-medium">
           {navigations.map((item) => (
             <li
               key={item.title}
               onClick={() => handleNavigate(item.path)}
-              className="relative cursor-pointer group"
+              className="cursor-pointer hover:text-[#fd6f00] transition-colors"
             >
-              <span className="group-hover:text-blue-400 transition-colors">
-                {item.title}
-              </span>
-              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-blue-400 transition-all group-hover:w-full"></span>
+              {item.title}
             </li>
           ))}
         </ul>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
+        {/* Action Button */}
+        <button className="hidden md:block bg-[#fd6f00] px-6 py-2 rounded-lg font-semibold hover:bg-orange-600 transition">
+          Hire Me
+        </button>
+
+        <button className="md:hidden text-[#fd6f00]" onClick={() => setOpen(!open)}>
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </nav>
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden bg-black/95 backdrop-blur-sm">
-          <ul className="flex flex-col items-center gap-6 py-6 text-lg font-semibold">
+        <div className="md:hidden bg-[#1e1e1e] border-b border-gray-800">
+          <ul className="flex flex-col items-center gap-6 py-8 text-lg font-semibold">
             {navigations.map((item) => (
-              <li
-                key={item.title}
-                onClick={() => handleNavigate(item.path)}
-                className="cursor-pointer hover:text-blue-400 transition"
-              >
+              <li key={item.title} onClick={() => handleNavigate(item.path)} className="cursor-pointer hover:text-[#fd6f00]">
                 {item.title}
               </li>
             ))}

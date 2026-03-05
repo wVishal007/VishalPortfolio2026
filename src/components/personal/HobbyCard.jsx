@@ -1,44 +1,44 @@
-const HobbyCard = ({
-  title,
-  description,
-  image,
-  tags,
-}) => {
+import React from "react";
+
+const HobbyCard = ({ title, description, image, tags }) => {
   return (
-    <div className="group hoverglow relative rounded-3xl overflow-hidden bg-gradient-to-br from-purple-900/40 to-black border border-white/10 hover:border-white/30 transition-all duration-500">
+    <div className="group relative bg-[#2b2b2b] rounded-2xl overflow-hidden border border-white/5 hover:border-[#fd6f00]/40 transition-all duration-500 flex flex-col h-full shadow-xl">
       
-      {/* Image */}
-      <div className="relative h-52 overflow-hidden">
+      {/* Image with Dark Overlay */}
+      <div className="relative h-56 overflow-hidden bg-[#1e1e1e]">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b] via-transparent to-transparent"></div>
       </div>
 
       {/* Content */}
       <div className="p-6 space-y-4">
-        <h3 className="text-xl font-bold text-white">
+        <h3 className="text-2xl font-black text-white tracking-tight uppercase group-hover:text-[#fd6f00] transition-colors">
           {title}
         </h3>
 
-        <p className="text-gray-400 text-sm leading-relaxed">
+        <p className="text-gray-400 text-sm leading-relaxed min-h-[60px]">
           {description}
         </p>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 text-xs">
+        {/* Minimalist Tags */}
+        <div className="flex flex-wrap gap-2 pt-2">
           {tags.map((tag, index) => (
             <span
               key={index}
-              className="px-2 py-1 rounded-full bg-white/10 text-gray-300"
+              className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-[#1e1e1e] text-gray-500 border border-white/5 rounded-md group-hover:text-white group-hover:border-[#fd6f00]/30 transition-all"
             >
               {tag}
             </span>
           ))}
         </div>
       </div>
+
+      {/* Subtle Glow Corner */}
+      <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-[#fd6f00] opacity-0 group-hover:opacity-10 blur-[50px] transition-opacity"></div>
     </div>
   );
 };
