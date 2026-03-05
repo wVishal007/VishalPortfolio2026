@@ -13,8 +13,8 @@ export const projects = [
       "A YouTube-focused RAG assistant that ingests videos, extracts transcripts, and allows users to ask questions about video content. Features dual frontends: Next.js web app and Chrome extension, with chat-based Q&A, Markdown support, and session management. Future-ready for PDF notes generation and auto-English translation for non-English videos.",
     image: TH_YT_RAG,
     tech: ["Next.js", "React", "Node.js", "Express", "RAG", "LLM", "YouTube API", "Chrome Extension", "STT", "Vector DB"],
-    github: "https://github.com/wVishal007/YouTube-RAG-Assistant",
-    live: "https://youtube-rag-assistant.vercel.app/",
+    github: "#",
+    live: "#",
     category: "AI/ML",
   },
   {
@@ -23,8 +23,8 @@ export const projects = [
       "An AI-powered virtual therapist platform that provides mental health support through chat and video calls. Users can have real-time interactions, receive personalized guidance, and track their sessions. Designed to make mental health support more accessible and interactive.",
     image: TH_THERAPIST,
     tech: ["React", "Node.js", "Express", "MongoDB", "AI", "NLP", "Chatbot", "Video Call Session"],
-    github: "https://github.com/wVishal007/Therapist-AI",
-    live: "https://therapist-ai.vercel.app/",
+    github: "https://github.com/wVishal007/ManoSetu-CWB",
+    live: "https://manosetu.vercel.app/",
     category: "AI/ML",
   },
   {

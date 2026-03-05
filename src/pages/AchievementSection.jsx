@@ -8,7 +8,7 @@ import { achievements } from "../data/achievementData";
  */
 const AchievementsSection = () => {
   return (
-    <section className="relative w-full py-32 px-6 bg-[#0a0a0a]/80 overflow-hidden selection:bg-[#E6E6FA] selection:text-black">
+    <section className="relative w-full py-32 px-6 bg-[#0a0a0a] overflow-hidden selection:bg-[#E6E6FA] selection:text-black">
       
       {/* Ambient Lighting Background */}
       <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[#E6E6FA]/5 blur-[140px] pointer-events-none rounded-full" />

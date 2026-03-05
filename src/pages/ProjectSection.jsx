@@ -17,7 +17,7 @@ const ProjectsSection = () => {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section className="w-full py-32 px-6 bg-[#0a0a0a]/70 min-h-screen relative selection:bg-[#E6E6FA] selection:text-black">
+    <section className="w-full py-32 px-6 bg-[#0a0a0a] min-h-screen relative selection:bg-[#E6E6FA] selection:text-black">
       
       {/* Ambient Lighting */}
       <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-[#E6E6FA]/5 blur-[120px] pointer-events-none rounded-full" />
