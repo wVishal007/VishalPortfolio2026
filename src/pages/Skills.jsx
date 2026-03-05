@@ -9,7 +9,7 @@ import { skills } from "../data/skillData";
  */
 const SkillsSection = () => {
   return (
-    <section className="relative w-full py-32 px-6 bg-[#0a0a0a] overflow-hidden selection:bg-[#E6E6FA] selection:text-black">
+    <section className="relative w-full py-32 px-6 bg-[#0a0a0a]/70 overflow-hidden selection:bg-[#E6E6FA] selection:text-black">
       
       {/* 1. AMBIENT BACKGROUND GLOW */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E6E6FA]/5 blur-[120px] pointer-events-none rounded-full" />

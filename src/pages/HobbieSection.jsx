@@ -8,7 +8,7 @@ import { hobbies } from "../data/hobbyData";
  */
 const HobbiesSection = () => {
   return (
-    <section className="relative w-full py-32 px-6 bg-[#0a0a0a] overflow-hidden selection:bg-[#E6E6FA] selection:text-black">
+    <section className="relative w-full py-32 px-6 bg-[#0a0a0a]/70 overflow-hidden selection:bg-[#E6E6FA] selection:text-black">
       
       {/* 1. SECTION HEADER (Editorial Style) */}
       <div className="max-w-7xl mx-auto mb-24">
