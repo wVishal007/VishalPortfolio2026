@@ -1,41 +1,39 @@
 import React from "react";
 
-/**
- * COMPONENT: HobbyCard
- * STYLE: Minimalist "Noir" Frame
- * THEME: Lavender / Matte Black
- */
 const HobbyCard = ({ title, description, image, tags }) => {
   return (
-    <div className="group relative bg-[#0a0a0a] border border-white/5 hover:border-[#E6E6FA]/20 transition-all duration-700 flex flex-col h-full overflow-hidden">
+    <div className="group relative bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 hover:border-indigo-600 dark:hover:border-[#E6E6FA] transition-all duration-500 flex flex-col h-full overflow-hidden shadow-sm hover:shadow-2xl">
       
-      {/* Image with High-End Masking */}
-      <div className="relative h-64 overflow-hidden bg-[#111]">
+      {/* IMAGE: Dynamic grayscale to color transition */}
+      <div className="relative h-72 md:h-80 overflow-hidden bg-gray-100 dark:bg-[#111]">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out"
+          className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-90 dark:opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]"
         />
-        {/* Subtle Side Mask */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80"></div>
+        {/* Responsive Gradient Mask */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#0a0a0a] via-transparent to-transparent opacity-80 group-hover:opacity-20 transition-opacity duration-700" />
       </div>
 
-      {/* Content Section */}
-      <div className="p-8 space-y-5 flex flex-col flex-1">
-        <h3 className="text-2xl font-black text-white tracking-tighter uppercase group-hover:text-[#E6E6FA] transition-colors leading-none">
-          {title}
-        </h3>
+      {/* CONTENT */}
+      <div className="p-8 space-y-6 flex flex-col flex-1 relative z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-[#E6E6FA] group-hover:scale-[2] transition-transform duration-500" />
+          <h3 className="text-3xl font-black text-black dark:text-white tracking-tighter uppercase leading-none group-hover:translate-x-2 transition-transform duration-500">
+            {title}
+          </h3>
+        </div>
 
-        <p className="text-gray-500 text-sm leading-relaxed min-h-[60px] font-medium">
+        <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed font-medium min-h-[60px]">
           {description}
         </p>
 
-        {/* Minimalist Tech-Style Tags */}
-        <div className="flex flex-wrap gap-x-4 gap-y-2 pt-4 border-t border-white/5 mt-auto">
-          {tags.map((tag, index) => (
+        {/* TAGS: Fixed visibility and mapping */}
+        <div className="flex flex-wrap gap-x-6 gap-y-3 pt-6 border-t border-black/5 dark:border-white/5 mt-auto">
+          {tags && tags.map((tag, index) => (
             <span
               key={index}
-              className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover:text-[#E6E6FA]/60 transition-colors"
+              className="text-[9px] font-black uppercase tracking-[0.3em] text-indigo-600/50 dark:text-[#E6E6FA]/40 group-hover:text-indigo-600 dark:group-hover:text-[#E6E6FA] transition-colors"
             >
               // {tag}
             </span>
@@ -43,8 +41,8 @@ const HobbyCard = ({ title, description, image, tags }) => {
         </div>
       </div>
 
-      {/* Signature Micro-Glow Accent */}
-      <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-[#E6E6FA]/5 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+      {/* REVEAL ACCENT */}
+      <div className="absolute top-0 right-0 w-[2px] h-0 group-hover:h-full bg-indigo-600 dark:bg-[#E6E6FA] transition-all duration-700" />
     </div>
   );
 };

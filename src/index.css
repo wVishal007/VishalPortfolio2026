@@ -1,18 +1,30 @@
 @import "tailwindcss";
 
+/* 🛠️ CRITICAL: v4 Manual Toggle Fix */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --nebula-gradient: linear-gradient(to right, #e6e6fa, #9b87f5, #d3cce3, #e6e6fa);
+  
+  /* Theme Variables */
+  --bg-color: #ffffff;
+  --text-color: #020205;
+  --border-alpha: rgba(0, 0, 0, 0.05);
 }
-body {
-  overscroll-behavior: none;
+
+.dark {
+  --bg-color: #020205;
+  --text-color: #ffffff;
+  --border-alpha: rgba(255, 255, 255, 0.05);
 }
 
 body {
-  /* Using a cleaner font for that high-end tech feel, keeping Playwrite as an accent */
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #020205;
-  color: #ffffff;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 /* 🚀 NEBULA TEXT GRADIENT */
@@ -47,7 +59,7 @@ body {
   display: none;
 }
 
-/* 🛸 THE HOVERGLOW (Upgraded to Lavender Aura) */
+/* 🛸 THE HOVERGLOW */
 .hoverglow {
   box-shadow: 0px 0px 150px 20px rgba(155, 135, 245, 0.3);
   transition: box-shadow 0.5s ease-in-out;

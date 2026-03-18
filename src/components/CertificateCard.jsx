@@ -1,57 +1,58 @@
 import React, { useState } from "react";
-import { ExternalLink, X, Award, Eye } from "lucide-react";
+import { ExternalLink, X, Award, Eye, ShieldCheck } from "lucide-react";
 
-/**
- * COMPONENT: CertificateCard
- * FIX: Text overlap & Responsive spacing
- */
 const CertificateCard = ({ title, provider, image, credentialUrl }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      {/* CARD BODY */}
-      <div className="group flex flex-col gap-6 h-full">
+      <div className="group flex flex-col gap-6 h-full transition-all duration-700">
+        {/* IMAGE CONTAINER */}
         <div 
-          className="relative aspect-[4/3] overflow-hidden bg-[#111] border border-white/5 cursor-pointer rounded-sm shrink-0"
+          className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-[#111] border border-black/5 dark:border-white/5 cursor-pointer rounded-sm shrink-0"
           onClick={() => setIsOpen(true)}
         >
-          {/* Subtle Scanline Texture */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] z-10 pointer-events-none" />
+          {/* Brutalist Corner Decorations */}
+          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-indigo-500/40 z-20" />
+          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-indigo-500/40 z-20" />
           
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 grayscale group-hover:grayscale-0"
+            className="w-full h-full object-cover opacity-80 dark:opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] grayscale group-hover:grayscale-0"
           />
 
-          {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-             <div className="flex items-center gap-2 text-white font-black uppercase tracking-[0.3em] text-[10px]">
-               <Eye size={16} className="text-[#E6E6FA]" /> Quick Preview
+          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[4px]">
+             <div className="flex flex-col items-center gap-3 text-white font-black uppercase tracking-[0.4em] text-[9px]">
+               <div className="p-3 rounded-full bg-white/10 border border-white/20">
+                 <Eye size={18} className="text-[#E6E6FA]" />
+               </div>
+               Inspect_Vault
              </div>
           </div>
         </div>
 
-        {/* METADATA - Improved spacing to prevent overlap */}
+        {/* METADATA ARCHITECTURE */}
         <div className="flex flex-col flex-grow px-1">
-          <div className="flex items-start justify-between gap-4 mb-auto">
-            {/* FIX: Changed leading-none to leading-tight (1.25) to prevent multi-line collision */}
-            <h3 className="text-lg font-black text-white tracking-tight uppercase leading-tight group-hover:text-[#E6E6FA] transition-colors min-h-[3rem]">
+          <div className="flex items-start justify-between gap-6 mb-6">
+            <h3 className="text-xl md:text-2xl font-black text-black dark:text-white tracking-tighter uppercase leading-[0.9] group-hover:text-indigo-600 dark:group-hover:text-[#E6E6FA] transition-colors min-h-[3rem]">
               {title}
             </h3>
-            <Award size={18} className="text-white/10 group-hover:text-[#E6E6FA] shrink-0 mt-1" />
+            <ShieldCheck size={20} className="text-black/10 dark:text-white/10 group-hover:text-indigo-500 dark:group-hover:text-[#E6E6FA] shrink-0 mt-1 transition-colors" />
           </div>
           
-          <div className="flex items-center justify-between border-t border-white/5 pt-4 mt-4">
-            <span className="text-[10px] font-black text-gray-600 uppercase tracking-[0.3em] truncate mr-2">
-              {provider}
-            </span>
+          <div className="flex items-center justify-between border-t border-black/5 dark:border-white/5 pt-5">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-mono text-gray-400 uppercase tracking-widest mb-1">Provider_Auth</span>
+              <span className="text-[10px] font-black text-black dark:text-gray-400 uppercase tracking-[0.2em]">
+                {provider}
+              </span>
+            </div>
             <a 
               href={credentialUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-white/20 hover:text-white transition-all transform hover:rotate-12 shrink-0"
+              className="w-10 h-10 flex items-center justify-center border border-black/5 dark:border-white/5 rounded-full text-black/20 dark:text-white/20 hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all"
             >
               <ExternalLink size={14} />
             </a>
@@ -59,38 +60,38 @@ const CertificateCard = ({ title, provider, image, credentialUrl }) => {
         </div>
       </div>
 
-      {/* LUXURY MODAL - Optimized for Mobile Screens */}
+      {/* TACTICAL MODAL */}
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/95 backdrop-blur-xl animate-in fade-in duration-500">
-          <div className="max-w-5xl w-full relative">
-            
-            {/* Close Trigger - Better hit area for mobile */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-white/95 dark:bg-black/98 backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-500">
+          <div className="max-w-6xl w-full relative">
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute -top-12 right-0 md:-top-16 text-white/40 hover:text-white flex items-center gap-3 transition-all font-black uppercase tracking-[0.3em] text-[10px]"
+              className="absolute -top-16 right-0 text-black dark:text-white flex items-center gap-4 transition-all font-black uppercase tracking-[0.5em] text-[10px] group"
             >
-              Close <X size={20} />
+              <span className="opacity-40 group-hover:opacity-100 transition-opacity">Close_Channel</span>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-full"><X size={20} /></div>
             </button>
 
-            {/* Content Box */}
-            <div className="bg-[#0a0a0a] border border-white/10 overflow-hidden rounded-sm shadow-[0_0_80px_rgba(230,230,250,0.1)]">
-              <div className="p-2 md:p-4 bg-black/40">
+            <div className="bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_0_80px_rgba(230,230,250,0.05)]">
+              <div className="p-4 bg-gray-50 dark:bg-black/40">
                 <img
                   src={image}
                   alt={title}
-                  className="w-full h-auto max-h-[60vh] md:max-h-[70vh] object-contain mx-auto"
+                  className="w-full h-auto max-h-[65vh] object-contain mx-auto transition-transform duration-1000"
                 />
               </div>
 
-              {/* Modal Footer - Stacked on Mobile */}
-              <div className="p-6 md:p-8 bg-[#111] border-t border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div className="space-y-1">
-                  <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-tight">
+              <div className="p-8 md:p-12 border-t border-black/5 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 bg-white dark:bg-[#111]">
+                <div className="space-y-3 text-center md:text-left">
+                  <h4 className="text-3xl md:text-5xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                     {title}
                   </h4>
-                  <p className="text-[#E6E6FA] text-[10px] font-black uppercase tracking-[0.4em] opacity-60">
-                    {provider}
-                  </p>
+                  <div className="flex items-center justify-center md:justify-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                    <p className="text-indigo-600 dark:text-[#E6E6FA] text-[10px] font-black uppercase tracking-[0.5em]">
+                      Auth_ID: {provider} // 2026_VERIFIED
+                    </p>
+                  </div>
                 </div>
                 
                 {credentialUrl && (
@@ -98,12 +99,12 @@ const CertificateCard = ({ title, provider, image, credentialUrl }) => {
                     href={credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative w-full md:w-auto text-center px-10 py-4 bg-white text-black font-black uppercase text-[10px] tracking-[0.3em] overflow-hidden transition-all shrink-0"
+                    className="group relative w-full md:w-auto px-12 py-6 bg-black dark:bg-white text-white dark:text-black font-black uppercase text-[10px] tracking-[0.4em] overflow-hidden transition-all text-center"
                   >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Verify Merit <ExternalLink size={12} />
+                    <span className="relative z-10 flex items-center justify-center gap-3">
+                      Verify_Merit <ExternalLink size={14} />
                     </span>
-                    <div className="absolute inset-0 bg-[#E6E6FA] translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                    <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-400 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                   </a>
                 )}
               </div>

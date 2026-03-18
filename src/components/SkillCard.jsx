@@ -1,80 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 
-/**
- * COMPONENT: SkillRow
- * FIX: Removed React.cloneElement to prevent "Undefined" element crashes.
- * THEME: Neon Lavender / Tactical Noir
- */
 const SkillRow = ({ title, level, icon }) => {
-  const segments = 32; 
+  const [isHovered, setIsHovered] = useState(false);
+  const segments = 24; 
   const threshold = parseInt(level) || 85;
 
   return (
-    <div className="group relative py-8 md:py-10 transition-all duration-500 border-b border-white/[0.03] last:border-0">
-      
-      {/* 1. HEADER: Icon, Title & Level */}
-      <div className="flex items-end justify-between mb-6">
-        <div className="flex items-center gap-3 md:gap-5">
-          {/* Simple Icon Rendering: No cloning, safer for React */}
-          <div className="text-[#E6E6FA] opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out shrink-0">
-            {icon}
+    <div 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative mb-16 md:mb-24 cursor-crosshair transition-all duration-500"
+    >
+      {/* BACKGROUND DEPTH EFFECT */}
+      <div className={`absolute -inset-x-6 -inset-y-4 bg-gray-50 dark:bg-white/[0.02] rounded-xl scale-95 opacity-0 transition-all duration-700 ${isHovered ? 'scale-100 opacity-100' : ''}`} />
+
+      <div className="relative z-10">
+        <div className="flex items-end justify-between mb-8">
+          <div className="flex items-start gap-6">
+            {/* ICON WITH FLOATING ANIMATION */}
+            <div className={`text-black dark:text-[#E6E6FA] transition-all duration-700 ${isHovered ? 'translate-y-[-8px] scale-125 opacity-100' : 'opacity-30'}`}>
+              {icon}
+            </div>
+            
+            <div>
+              <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white tracking-tight uppercase leading-none">
+                {title}
+              </h3>
+              <span className="text-[9px] font-mono text-indigo-500 dark:text-indigo-300 tracking-[0.3em] uppercase opacity-60">
+                Lvl_{level}% // Status_Active
+              </span>
+            </div>
           </div>
-          
-          <h3 className="text-sm md:text-xl font-black text-white tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.25em]">
-            {title}
-            <span className="block h-[1px] w-0 group-hover:w-full bg-[#E6E6FA]/40 transition-all duration-700 mt-1" />
-          </h3>
         </div>
 
-        <div className="flex flex-col items-end">
-          <span className="text-[10px] md:text-xs font-mono font-black text-[#E6E6FA] tracking-tighter">
-            SYS_STAT: <span className="group-hover:animate-pulse">{level}%</span>
-          </span>
+        {/* CREATIVE SEGMENTED METER */}
+        <div className="flex gap-1.5 h-12 items-end">
+          {[...Array(segments)].map((_, i) => {
+            const isFilled = (i / segments) * 100 < threshold;
+            return (
+              <div 
+                key={i}
+                className={`flex-1 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  isFilled 
+                    ? 'bg-black dark:bg-[#E6E6FA] shadow-sm' 
+                    : 'bg-black/5 dark:bg-white/5'
+                }`}
+                style={{ 
+                  height: isFilled ? `${40 + (i * 2)}%` : '15%',
+                  transitionDelay: isFilled ? `${i * 15}ms` : '0ms',
+                  opacity: isHovered ? 1 : isFilled ? 0.7 : 0.3
+                }}
+              />
+            );
+          })}
         </div>
-      </div>
 
-      {/* 2. THE SEGMENTED METER */}
-      <div className="relative h-[8px] md:h-[10px] w-full flex gap-[2px] md:gap-[4px] items-center">
-        {[...Array(segments)].map((_, i) => {
-          const isFilled = (i / segments) * 100 < threshold;
-          
-          return (
-            <div 
-              key={i}
-              className={`h-full flex-1 transition-all duration-500 ease-in-out ${
-                isFilled 
-                  ? 'bg-[#E6E6FA] shadow-[0_0_15px_rgba(230,230,250,0.2)] opacity-100' 
-                  : 'bg-white/5 opacity-40'
-              } group-hover:h-[120%] group-hover:translate-y-[-1px]`}
-              style={{ 
-                transitionDelay: isFilled ? `${i * 10}ms` : '0ms'
-              }}
-            />
-          );
-        })}
-
-        {/* 3. ACTIVE SCANNING OVERLAY - Pure CSS animation */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
-          <div className="w-24 h-full bg-white/10 blur-2xl absolute -left-24 group-hover:translate-x-[1000%] transition-transform duration-[2s] ease-in-out" />
+        {/* METER FOOTER */}
+        <div className="mt-6 flex justify-between border-t border-black/5 dark:border-white/10 pt-4">
+          <div className="flex gap-4">
+            <span className="text-[8px] font-black text-black/40 dark:text-white/30 uppercase tracking-widest">
+              Stability: 0.984ms
+            </span>
+            <span className="text-[8px] font-black text-black/40 dark:text-white/30 uppercase tracking-widest">
+              Type: Full_Stack
+            </span>
+          </div>
+          <div className={`w-2 h-2 rounded-full transition-all duration-500 ${isHovered ? 'bg-indigo-500 animate-ping' : 'bg-black/20 dark:bg-white/10'}`} />
         </div>
       </div>
-
-      {/* 4. TACTICAL FOOTER */}
-      <div className="mt-5 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#E6E6FA] animate-pulse" />
-          <span className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.4em] text-gray-500 group-hover:text-white transition-colors">
-            Neural_Load_Stability: Optimized
-          </span>
-        </div>
-        
-        <span className="text-[8px] font-mono text-white/10 uppercase tracking-widest hidden sm:block">
-          Ver_03.05.2026
-        </span>
-      </div>
-
-      {/* Global Row Hover Glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#E6E6FA]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
     </div>
   );
 };
