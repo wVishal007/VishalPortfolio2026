@@ -4,35 +4,42 @@ import { skills } from "../data/skillData";
 
 const SkillsSection = () => {
   return (
-    <section className="relative w-full py-32 px-6 transition-colors duration-700 bg-white dark:bg-[#0a0a0a] overflow-hidden selection:bg-[#E6E6FA] selection:text-black">
+    <section className="relative w-full py-24 md:py-32 px-6 bg-[#fdfdfd] dark:bg-[#030712] overflow-hidden transition-colors duration-500">
       
-      {/* AMBIENT BACKGROUND GLOW - Flips color in light mode */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-100 dark:bg-[#E6E6FA]/5 blur-[120px] pointer-events-none rounded-full" />
+      {/* Background Decorative Element */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/5 dark:bg-[#E6E6FA]/5 blur-[120px] pointer-events-none rounded-full" />
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-500/5 dark:bg-indigo-500/5 blur-[100px] pointer-events-none rounded-full" />
       
-      <div className="max-w-6xl mx-auto relative z-10">
-        <header className="mb-32 flex flex-col md:flex-row md:items-end justify-between border-b border-black/5 dark:border-white/5 pb-12">
-          <div className="max-w-2xl">
-            <span className="text-indigo-600 dark:text-[#E6E6FA] text-[10px] font-black uppercase tracking-[0.5em] mb-6 block">
-              Capabilities // 2026_CORE
+      <div className="max-w-7xl mx-auto relative z-10">
+        <header className="mb-24 md:mb-32">
+          <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08] mb-8">
+            <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-[#E6E6FA]" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/50 dark:text-white/50">
+              Technical Arsenal // 2026 Edition
             </span>
-            <h2 className="text-7xl md:text-9xl font-black text-black dark:text-white tracking-tighter uppercase leading-[0.8]">
-              TECH<br /> 
-              <span className="text-black/10 dark:text-white/10 tracking-normal italic font-light">Ecosystem</span>
-            </h2>
           </div>
-          
-          <p className="mt-8 md:mt-0 text-gray-500 max-w-xs text-xs md:text-sm font-medium leading-relaxed uppercase tracking-widest">
-            Merging <span className="text-black dark:text-white">Generative Intelligence</span> with 
-            hardened MERN architectures. Refined for the next web epoch.
-          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
+            <h2 className="text-6xl md:text-8xl lg:text-9xl font-black text-black dark:text-white tracking-tighter uppercase leading-[0.8]">
+              CORE<br /> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-black/20 via-black to-black/20 dark:from-white/10 dark:via-white dark:to-white/10 italic font-light tracking-normal">Stack</span>
+            </h2>
+            
+            <div className="max-w-sm">
+              <p className="text-sm md:text-base text-black/50 dark:text-white/40 font-medium leading-relaxed uppercase tracking-tight">
+                Architecting <span className="text-black dark:text-white">autonomous logic</span> with 
+                Next.js orchestration and PyTorch deep learning. Built for scale, designed for humans.
+              </p>
+            </div>
+          </div>
         </header>
 
-        {/* ASYMMETRIC GRID - Creative staggered feel */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-12">
+        {/* ASYMMETRIC GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-16 lg:gap-x-24">
           {skills.map((skill, index) => (
             <div 
               key={index} 
-              className={`md:col-span-6 ${index % 2 !== 0 ? 'md:mt-24' : ''}`}
+              className={`md:col-span-6 ${index % 2 !== 0 ? 'md:mt-32' : ''}`}
             >
               <SkillRow {...skill} />
             </div>
@@ -40,10 +47,10 @@ const SkillsSection = () => {
         </div>
       </div>
 
-      {/* SIDE DECORATIVE INFO */}
-      <div className="hidden xl:block absolute left-8 top-1/2 -rotate-90 origin-left">
-        <p className="text-[10px] font-mono text-black/20 dark:text-white/10 tracking-[1.5em] uppercase">
-          Autonomous_System_Check // Pass
+      {/* FIXED FLOATING DECO (Mobile Responsive hidden) */}
+      <div className="hidden 2xl:block fixed right-12 top-1/2 -rotate-90 origin-right pointer-events-none">
+        <p className="text-[9px] font-mono text-black/10 dark:text-white/5 tracking-[2em] uppercase">
+          System_Integrity_Optimal // Node_01
         </p>
       </div>
     </section>

@@ -12,47 +12,43 @@ const ProjectsSection = () => {
     : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section className="w-full py-20 md:py-40 px-0 bg-white dark:bg-[#0a0a0a] min-h-screen relative transition-colors duration-700 overflow-hidden">
+    <section className="w-full py-20 md:py-40 bg-white dark:bg-[#0a0a0a] min-h-screen relative transition-colors duration-700 overflow-hidden">
       
-      {/* REACTIVE BACKGROUND GRADIENTS */}
-      <div className="absolute top-[-10%] right-[-10%] w-[70vw] h-[70vw] bg-indigo-100/30 dark:bg-[#E6E6FA]/[0.03] blur-[120px] pointer-events-none rounded-full animate-pulse" />
-      <div className="absolute bottom-[-5%] left-[-5%] w-[50vw] h-[50vw] bg-blue-100/20 dark:bg-blue-900/[0.03] blur-[100px] pointer-events-none rounded-full" />
+      {/* ATMOSPHERIC BACKGROUND */}
+      <div className="absolute top-0 right-0 w-[80vw] h-[80vw] bg-indigo-50/40 dark:bg-indigo-900/[0.02] blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-[60vw] h-[60vw] bg-blue-50/30 dark:bg-blue-900/[0.02] blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-full relative z-10">
+      <div className="relative z-10">
         
-        {/* EDITORIAL HEADER: Responsive Flex-Col to Row */}
-        <div className="max-w-7xl mx-auto px-6 mb-20 md:mb-40 flex flex-col lg:flex-row lg:items-end justify-between gap-16">
-          <div className="relative group">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="h-px w-8 bg-black dark:bg-[#E6E6FA] transition-all group-hover:w-16" />
-              <span className="text-indigo-600 dark:text-[#E6E6FA] text-[10px] font-black uppercase tracking-[0.6em]">
-                Archives_2026
+        {/* EDITORIAL HEADER */}
+        <div className="max-w-7xl mx-auto px-6 mb-24 md:mb-48 flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+          <div className="relative">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-[1px] w-12 bg-indigo-600 dark:bg-[#E6E6FA]" />
+              <span className="text-indigo-600 dark:text-[#E6E6FA] text-[10px] font-black uppercase tracking-[0.8em]">
+                Selected_Works
               </span>
             </div>
             
-            {/* Fluid Typography using clamp for responsiveness */}
-            <h2 className="text-[clamp(4rem,15vw,12rem)] font-black text-black dark:text-white tracking-tighter uppercase leading-[0.8] transition-all">
+            <h2 className="text-[clamp(3.5rem,12vw,10rem)] font-black text-black dark:text-white tracking-tighter uppercase leading-[0.8]">
               PROJ<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-black/10 via-black/5 to-transparent dark:from-white/80 dark:via-blue-500/20 dark:to-white/90 italic font-light">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-black/20 to-black dark:from-white/10 dark:to-white italic font-extralight">
                 ECTS
               </span>
             </h2>
           </div>
           
-          {/* NAVIGATION: Now horizontally scrollable on mobile */}
-          <nav className="flex flex-col gap-6 items-start lg:items-end w-full lg:w-auto">
-            <span className="text-[9px] font-mono text-gray-400 dark:text-gray-500 uppercase tracking-[0.4em] border-l lg:border-l-0 lg:border-r border-black/10 dark:border-white/10 pl-4 lg:pl-0 lg:pr-4">
-              Selection_System // Active
-            </span>
-            <div className="flex flex-wrap gap-3 md:gap-4 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
+          {/* NAVIGATION */}
+          <nav className="flex flex-col gap-6 items-start lg:items-end">
+            <div className="flex gap-2 p-1 bg-black/[0.03] dark:bg-white/[0.03] rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`whitespace-nowrap px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] border transition-all duration-500
+                  className={`px-6 md:px-8 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] rounded-full transition-all duration-500
                     ${activeCategory === cat 
-                      ? "bg-black dark:bg-white text-white dark:text-black border-transparent shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(255,255,255,0.05)] scale-105" 
-                      : "bg-transparent text-black/40 dark:text-white/30 border-black/5 dark:border-white/5 hover:border-black/20 dark:hover:border-white/20 hover:text-black dark:hover:text-white"
+                      ? "bg-white dark:bg-[#1a1a1a] text-black dark:text-white shadow-xl scale-100" 
+                      : "text-black/40 dark:text-white/30 hover:text-black dark:hover:text-white"
                     }`}
                 >
                   {cat}
@@ -62,31 +58,31 @@ const ProjectsSection = () => {
           </nav>
         </div>
 
-        {/* GALLERY WRAPPER */}
-        <div className="flex flex-col border-t border-black/5 dark:border-white/5">
+        {/* GALLERY */}
+        <div className="border-t border-black/[0.08] dark:border-white/[0.08]">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project, index) => (
-              <ProjectCard key={index} {...project} />
+              <ProjectCard key={index} index={index} {...project} />
             ))
           ) : (
             <div className="py-40 text-center">
-              <p className="text-gray-400 font-mono text-xs uppercase tracking-widest animate-pulse">
-                Initializing_Data_Streams...
+              <p className="text-[10px] font-mono uppercase tracking-[0.5em] text-black/20 dark:text-white/10">
+                Awaiting_Data_Input...
               </p>
             </div>
           )}
         </div>
 
-        {/* FOOTER DETAIL: Enhanced Brutalist Signature */}
-        <footer className="py-32 flex flex-col items-center justify-center gap-8 px-6">
-          <div className="w-px h-24 bg-gradient-to-b from-black/10 to-transparent dark:from-white/10 dark:to-transparent" />
-          <div className="group cursor-none text-center">
-            <p className="text-[10px] font-black uppercase tracking-[1.5em] text-black/20 dark:text-white/10 group-hover:text-indigo-500 transition-colors duration-700">
-               End_of_Exhibit
+        {/* BRUTALIST FOOTER */}
+        <footer className="pt-40 pb-20 flex flex-col items-center gap-10">
+          <div className="h-32 w-[1px] bg-gradient-to-b from-indigo-600/50 to-transparent" />
+          <div className="text-center space-y-4">
+            <p className="text-[9px] font-black uppercase tracking-[1.2em] text-black/30 dark:text-white/20">
+              End_of_Transmission
             </p>
-            <span className="text-[8px] font-mono text-black/5 dark:text-white/5 uppercase mt-4 block">
-              Automated_System_Report // Vishal_Singh_2026
-            </span>
+            <p className="text-[8px] font-mono text-black/10 dark:text-white/5 uppercase">
+              Vishal Singh // Systems_Architect // 2026
+            </p>
           </div>
         </footer>
       </div>

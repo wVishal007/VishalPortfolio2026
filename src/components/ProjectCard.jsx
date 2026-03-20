@@ -1,67 +1,77 @@
 import React from "react";
 import { Github, ArrowUpRight } from "lucide-react";
 
-const ProjectCard = ({ title, description, image, tech, github, live }) => {
+const ProjectCard = ({ title, description, image, tech, github, live, index }) => {
+  // Pad the index for the "Archive" look (e.g., 01, 02)
+  const displayIndex = String(index + 1).padStart(2, '0');
+
   return (
-    <div className="group relative border-b border-black/5 dark:border-white/5 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-gray-50 dark:hover:bg-white/[0.01] overflow-hidden">
+    <div className="group relative border-b border-black/[0.06] dark:border-white/[0.06] transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-gray-50/50 dark:hover:bg-white/[0.01] overflow-hidden">
       
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 py-20 px-4 md:px-12 relative z-10">
+      {/* Container: Stacks on mobile, Side-by-side on LG screens */}
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 md:gap-16 py-12 md:py-24 lg:py-32 px-6 md:px-12 relative z-10">
         
-        {/* 1. ARCHITECTURAL IMAGE BOX */}
-        <div className="relative w-full md:w-2/5 aspect-[16/10] overflow-hidden bg-gray-200 dark:bg-[#1e1e1e] group-hover:shadow-2xl transition-shadow duration-700">
+        {/* 1. ADAPTIVE IMAGE BOX */}
+        <div className="relative w-full lg:w-[45%] aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-[#111] rounded-sm group-hover:shadow-2xl transition-all duration-700">
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)]"
+            className="w-full h-full object-cover grayscale brightness-[0.8] group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)]"
           />
-          {/* Subtle Overlay Badge */}
-          <div className="absolute top-4 left-4 mix-blend-difference">
-            <span className="text-[8px] font-black text-white uppercase tracking-[0.5em]">
-              Case_Study // 01
+          {/* Mobile-friendly Badge */}
+          <div className="absolute top-4 left-4 md:top-6 md:left-6 mix-blend-difference">
+            <span className="text-[10px] font-black text-white uppercase tracking-[0.4em]">
+              Data_Set // {displayIndex}
             </span>
           </div>
         </div>
 
         {/* 2. CONTENT ARCHITECTURE */}
-        <div className="flex-1 space-y-8">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-5xl md:text-7xl font-black text-black dark:text-white tracking-tighter uppercase leading-none transform group-hover:translate-x-4 transition-transform duration-700">
+        <div className="flex-1 w-full space-y-8 lg:space-y-12">
+          <div className="space-y-6">
+            <div className="flex items-start justify-between gap-4">
+              {/* FLUID TEXT: Scales from 2.5rem to 5rem based on screen width */}
+              <h3 className="text-[clamp(2.5rem,8vw,5rem)] font-black text-black dark:text-white tracking-tighter uppercase leading-[0.9] transform group-hover:translate-x-2 transition-transform duration-700">
                 {title}
               </h3>
+              
               {live && (
                 <a href={live} target="_blank" rel="noopener noreferrer" 
-                   className="w-12 h-12 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all">
-                  <ArrowUpRight size={20} />
+                   className="mt-2 w-12 h-12 md:w-16 md:h-16 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-500 shrink-0">
+                  <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6" />
                 </a>
               )}
             </div>
 
-            <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg leading-tight max-w-xl font-medium tracking-tight">
+            <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base lg:text-lg leading-relaxed max-w-xl font-medium tracking-tight">
               {description}
             </p>
           </div>
 
-          {/* 3. TECH STACK - Minimalist Inline */}
-          <div className="flex flex-wrap gap-x-8 gap-y-2 border-t border-black/5 dark:border-white/5 pt-6">
-            {tech.map((item, index) => (
-              <span key={index} className="text-indigo-600 dark:text-[#E6E6FA] text-[9px] font-black uppercase tracking-[0.3em] opacity-40 group-hover:opacity-100 transition-opacity">
+          {/* 3. TECH STACK - Responsive Pill Grid */}
+          <div className="flex flex-wrap gap-2 md:gap-3 border-t border-black/[0.05] dark:border-white/[0.05] pt-8">
+            {tech.map((item, i) => (
+              <span key={i} className="px-3 py-1 bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.1] text-indigo-600 dark:text-[#E6E6FA] text-[9px] font-bold uppercase tracking-[0.2em] rounded-full opacity-60 group-hover:opacity-100 transition-all duration-500">
                 {item}
               </span>
             ))}
           </div>
 
-          {github && (
-            <a href={github} target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-black/40 dark:text-white/20 hover:text-black dark:hover:text-white transition-all">
-              <Github size={14} /> View Repository
-            </a>
-          )}
+          {/* 4. REPOSITORY LINK */}
+          <div className="flex items-center gap-8">
+            {github && (
+              <a href={github} target="_blank" rel="noopener noreferrer"
+                 className="group/link inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-black/40 dark:text-white/20 hover:text-indigo-600 dark:hover:text-white transition-all">
+                <Github size={16} className="group-hover/link:rotate-12 transition-transform" /> 
+                <span className="border-b border-transparent group-hover/link:border-current transition-all">Source_Code</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
       
-      {/* 4. HOVER REVEAL - The "Goven" Signature */}
-      <div className="absolute top-0 left-0 w-2 h-0 group-hover:h-full bg-indigo-600 dark:bg-[#E6E6FA] transition-all duration-700" />
+      {/* 5. VISUAL ACCENT (Side Border) */}
+      <div className="absolute top-0 left-0 w-[2px] md:w-[4px] h-0 group-hover:h-full bg-indigo-600 dark:bg-[#E6E6FA] transition-all duration-700 ease-in-out" />
     </div>
   );
 };
