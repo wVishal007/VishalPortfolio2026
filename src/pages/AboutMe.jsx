@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import mypic from "../assets/mypic-2.jpg";
+import mypic from "../assets/mypic-5.png";
 import { Github, Linkedin, Mail, Command, ChevronRight } from "lucide-react";
 
 const AboutMe = () => {
@@ -48,7 +48,8 @@ const AboutMe = () => {
                 <img
                   src={mypic}
                   alt="Vishal Singh"
-                  className="w-full h-full object-cover grayscale brightness-110 contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-in-out"
+                  className="w-full h-full scale-150 grayscale object-cover brightness-110 contrast-110 group-hover:grayscale-0 group-hover:scale-120 transition-all duration-1000 ease-in-out"
+                  // className="w-full h-full object-cover grayscale brightness-110 contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-in-out"
                 />
                 
                 {/* Tactical Label */}
