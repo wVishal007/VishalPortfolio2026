@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
-import { projects } from '../data/projectData';
+import { usePortfolio } from "../context/portfolio";
 
 const categories = ["All", "Web", "AI/ML"];
 
 const ProjectsSection = () => {
+  const { projects } = usePortfolio();
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredProjects = activeCategory === "All"

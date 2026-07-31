@@ -1,8 +1,9 @@
 import React from "react";
 import AchievementCard from "../components/AchievementCard";
-import { achievements } from "../data/achievementData";
+import { usePortfolio } from "../context/portfolio";
 
 const AchievementsSection = () => {
+  const { achievements } = usePortfolio();
   return (
     <section className="relative w-full py-32 md:py-48 px-0 bg-white dark:bg-[#0a0a0a] transition-colors duration-700 overflow-hidden">
       

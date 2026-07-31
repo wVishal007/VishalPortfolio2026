@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { hobbies } from "../data/hobbyData";
 import AboutMe from "./AboutMe";
 import SkillsSection from "./Skills";
 import ProjectsSection from "./ProjectSection";
@@ -67,9 +66,9 @@ const HomePage = () => {
         <AchievementsSection/>
       </section>
 
-      <section ref={HobbyRef}>
-        <HobbiesSection hobbies={hobbies}/>
-      </section>
+        <section ref={HobbyRef}>
+          <HobbiesSection />
+        </section>
 
       <Footer/>
     </div>

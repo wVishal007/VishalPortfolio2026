@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import mypic from "../assets/mypic-5.png";
 import { Github, Linkedin, Mail, Command, ChevronRight } from "lucide-react";
+import { usePortfolio } from "../context/portfolio";
 
 const AboutMe = () => {
+  const { profile } = usePortfolio();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -45,17 +47,16 @@ const AboutMe = () => {
               <div className="absolute -inset-4 border border-black/[0.08] dark:border-white/10 rounded-[2rem] translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700" />
               
               <div className="relative h-full w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-white/5 border border-black/10 dark:border-white/10">
-                <img
-                  src={mypic}
-                  alt="Vishal Singh"
+               <img
+                  src={profile.profileImage || mypic}
+                  alt={profile.name || "Vishal Singh"}
                   className="w-full h-full scale-150 grayscale object-cover brightness-110 contrast-110 group-hover:grayscale-0 group-hover:scale-120 transition-all duration-1000 ease-in-out"
-                  // className="w-full h-full object-cover grayscale brightness-110 contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-in-out"
                 />
                 
                 {/* Tactical Label */}
                 <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md text-[9px] font-mono tracking-tighter text-white px-3 py-1.5 rounded-lg flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-                  STATIONED_DELHI_IND
+                  {profile.location ? `STATIONED_${profile.location.toUpperCase().replace(/\s+/g, "_").replace(/[^A-Z0-9_]/g, "")}` : "STATIONED_DELHI_IND"}
                 </div>
               </div>
 
@@ -82,34 +83,33 @@ const AboutMe = () => {
           {/* 3. EDITORIAL CONTENT */}
           <div className="lg:col-span-7 order-1 lg:order-2">
             <header className="space-y-6">
-              <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08]">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-[#E6E6FA]" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/60">
-                  Full-Stack AI Architect
-                </span>
-              </div>
+               <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08]">
+                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-[#E6E6FA]" />
+                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/60">
+                   {profile.role || "Full-Stack AI Architect"}
+                 </span>
+               </div>
               
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.8] mb-8">
-                VISHAL<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-b from-black/80 to-black dark:from-white dark:to-white/20">
-                  SINGH.
-                </span>
-              </h1>
+               <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.8] mb-8">
+                 {(profile.name || "VISHAL").split(" ")[0].toUpperCase()}<br />
+                 <span className="text-transparent bg-clip-text bg-gradient-to-b from-black/80 to-black dark:from-white dark:to-white/20">
+                   {(profile.name || "VISHAL SINGH").split(" ").slice(1).join(" ").toUpperCase()}.
+                 </span>
+               </h1>
 
-              <p className="text-lg md:text-xl text-black/60 dark:text-white/40 font-medium leading-relaxed max-w-xl">
-                I engineer <span className="text-black dark:text-white italic">autonomous systems</span> and 
-                premium digital experiences. Bridging the gap between RAG-based intelligence and modern MERN architecture.
-              </p>
+               <p className="text-lg md:text-xl text-black/60 dark:text-white/40 font-medium leading-relaxed max-w-xl">
+                 {profile.bio || "I engineer autonomous systems and premium digital experiences. Bridging the gap between RAG-based intelligence and modern MERN architecture."}
+               </p>
             </header>
 
             {/* 4. SKILL CHIPS */}
-            <div className="flex flex-wrap gap-2 mt-8">
-              {["PyTorch", "Next.js 15", "Neo4j", "Agentic AI", "RAG"].map((tech) => (
-                <span key={tech} className="px-4 py-2 rounded-xl bg-white dark:bg-white/5 border border-black/[0.05] dark:border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-indigo-500/50 transition-colors cursor-default">
-                  {tech}
-                </span>
-              ))}
-            </div>
+               <div className="flex flex-wrap gap-2 mt-8">
+                 {(profile.techChips && profile.techChips.length ? profile.techChips : ["PyTorch", "Next.js 15", "Neo4j", "Agentic AI", "RAG"]).map((tech) => (
+                   <span key={tech} className="px-4 py-2 rounded-xl bg-white dark:bg-white/5 border border-black/[0.05] dark:border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-indigo-500/50 transition-colors cursor-default">
+                     {tech}
+                   </span>
+                 ))}
+               </div>
 
             {/* 5. CTAs & SOCIALS */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 mt-12">
@@ -119,17 +119,17 @@ const AboutMe = () => {
                 <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </button>
 
-              <div className="flex items-center gap-6">
-                {[
-                  { icon: <Github size={20} />, link: "#" },
-                  { icon: <Linkedin size={20} />, link: "#" },
-                  { icon: <Mail size={20} />, link: "#" }
-                ].map((social, i) => (
-                  <a key={i} href={social.link} className="text-black/40 dark:text-white/30 hover:text-indigo-600 dark:hover:text-[#E6E6FA] transition-all">
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
+               <div className="flex items-center gap-6">
+                 {[
+                   { icon: <Github size={20} />, link: profile.socials?.github || "#" },
+                   { icon: <Linkedin size={20} />, link: profile.socials?.linkedin || "#" },
+                   { icon: <Mail size={20} />, link: profile.socials?.mail || "#" },
+                 ].map((social, i) => (
+                   <a key={i} href={social.link} className="text-black/40 dark:text-white/30 hover:text-indigo-600 dark:hover:text-[#E6E6FA] transition-all">
+                     {social.icon}
+                   </a>
+                 ))}
+               </div>
             </div>
           </div>
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { Github, ArrowUpRight } from "lucide-react";
 
-const ProjectCard = ({ title, description, image, tech, github, live, index }) => {
+const ProjectCard = ({ title, description, coverImage, image, tech, github, live, index }) => {
+  const cardImage = coverImage || image;
   // Pad the index for the "Archive" look (e.g., 01, 02)
   const displayIndex = String(index + 1).padStart(2, '0');
 
@@ -13,9 +14,9 @@ const ProjectCard = ({ title, description, image, tech, github, live, index }) =
         
         {/* 1. ADAPTIVE IMAGE BOX */}
         <div className="relative w-full lg:w-[45%] aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-[#111] rounded-sm group-hover:shadow-2xl transition-all duration-700">
-          <img
-            src={image}
-            alt={title}
+           <img
+             src={cardImage}
+             alt={title}
             className="w-full h-full object-cover grayscale brightness-[0.8] group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)]"
           />
           {/* Mobile-friendly Badge */}
