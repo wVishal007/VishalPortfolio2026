@@ -1,21 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Menu, X, Sun, Moon, ArrowRight } from "lucide-react";
+import { Menu, X, Sun, Moon, TerminalSquare } from "lucide-react";
+
+const navigations = [
+  { title: "home", path: "/about-me", num: "01" },
+  { title: "skills", path: "/skills", num: "02" },
+  { title: "projects", path: "/projects", num: "03" },
+  { title: "certifications", path: "/certifications", num: "04" },
+  { title: "achievements", path: "/Achievements", num: "05" },
+  { title: "hobbies", path: "/Hobbies", num: "06" },
+];
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  
+  const [active, setActive] = useState(0);
+  const [time, setTime] = useState(() =>
+    new Date().toLocaleTimeString("en-GB", { hour12: false })
+  );
+
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem("theme");
-    return saved ? saved === "dark" : true; 
+    return saved ? saved === "dark" : true;
   });
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const ids = ["about", "skills", "projects", "certs", "achievements", "hobbies"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = ids.indexOf(entry.target.id);
+            if (idx >= 0) setActive(idx);
+          }
+        });
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
 
+  useEffect(() => {
     const root = window.document.documentElement;
     if (isDarkMode) {
       root.classList.add("dark");
@@ -26,112 +55,137 @@ const Navbar = () => {
       root.classList.add("light");
       localStorage.setItem("theme", "light");
     }
-
-    return () => window.removeEventListener("scroll", handleScroll);
   }, [isDarkMode]);
 
-  // Prevent scrolling when mobile menu is open
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    const id = setInterval(() => {
+      setTime(new Date().toLocaleTimeString("en-GB", { hour12: false }));
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "unset";
   }, [open]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
-  const navigations = [
-    { title: "Home", path: "/about-me" },
-    { title: "Skills", path: "/skills" },
-    { title: "Projects", path: "/projects" },
-    { title: "Certifications", path: "/certifications" },
-    { title: "Achievements", path: "/Achievements" },
-  ];
-
   const handleNavigate = (path) => {
     setOpen(false);
-    setTimeout(() => navigate(path), 300);
+    setTimeout(() => navigate(path), 250);
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
-      scrolled 
-        ? "bg-white/70 dark:bg-[#030712]/70 backdrop-blur-md border-b border-black/5 dark:border-white/10 py-3" 
-        : "bg-transparent border-b border-transparent py-6"
-    }`}>
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12">
-        
-        {/* LOGO - Minimal & Bold */}
-        <div 
-          className="text-xl font-black cursor-pointer tracking-tighter group flex items-center" 
-          onClick={() => handleNavigate("/about-me")}
-        >
-          <span className="text-indigo-600 dark:text-[#E6E6FA] transition-transform duration-500 group-hover:-translate-y-1">V</span>
-          <span className="text-black dark:text-white ml-0.5">ISHAL</span>
-        </div>
-
-        {/* DESKTOP NAV - Ultra Minimal */}
-        <ul className="hidden lg:flex gap-12">
-          {navigations.map((item) => (
-            <li 
-              key={item.title} 
-              onClick={() => handleNavigate(item.path)} 
-              className="relative text-[11px] font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/50 hover:text-black dark:hover:text-[#E6E6FA] transition-all cursor-pointer group"
-            >
-              {item.title}
-              <span className="absolute -bottom-1 left-1/2 w-0 h-[1.5px] bg-indigo-600 dark:bg-[#E6E6FA] transition-all duration-300 group-hover:w-full group-hover:left-0" />
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-4">
-          {/* THEME TOGGLE - Icon morph effect */}
-          <button 
-            onClick={toggleTheme} 
-            className="p-2.5 rounded-xl border border-black/5 dark:border-white/10 bg-black/5 dark:bg-white/5 hover:scale-110 active:scale-95 transition-all"
-            aria-label="Toggle Theme"
+    <header className="fixed top-0 left-0 right-0 z-[100]">
+      <div className="border-b border-cyan/20 dark:border-cyan/15 bg-void/70 dark:bg-void/75">
+        <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-6 py-3">
+          {/* LOGO — terminal prompt */}
+          <div
+            className="group flex items-center gap-2 cursor-pointer"
+            onClick={() => handleNavigate("/about-me")}
           >
-            <div className="text-black dark:text-white">
-              {isDarkMode ? <Sun size={18} strokeWidth={2.5} /> : <Moon size={18} strokeWidth={2.5} />}
+            <span className="flex h-7 w-7 items-center justify-center rounded border border-primary/40 text-primary glow-cyan">
+              <TerminalSquare size={14} />
+            </span>
+            <span className="font-mono text-sm font-bold text-void dark:text-paper">
+              ~/vishal
+              <span className="terminal-cursor ml-1.5 hidden sm:inline-block" />
+            </span>
+          </div>
+
+          {/* DESKTOP NAV — commands */}
+          <ul className="hidden lg:flex items-center gap-6">
+            {navigations.map((item, i) => {
+              const isActive = i === active;
+              return (
+                <li
+                  key={item.num}
+                  onClick={() => handleNavigate(item.path)}
+                  className="group relative cursor-pointer"
+                >
+                  <span
+                    className={`flex items-center gap-1.5 font-mono text-[11px] transition-colors ${
+                      isActive
+                        ? "text-primary"
+                        : "text-void/60 dark:text-paper/60 group-hover:text-primary dark:group-hover:text-primary"
+                    }`}
+                  >
+                    <span className="index-num text-void/30 dark:text-paper/30">&gt;</span>
+                    {item.title}
+                    {isActive && (
+                      <span className="ml-0.5 rounded bg-primary/15 px-1 text-[8px] font-bold text-primary">
+                        active
+                      </span>
+                    )}
+                  </span>
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* STATUS + CLOCK */}
+            <div className="hidden md:flex items-center gap-2 font-mono text-[10px] text-void/50 dark:text-paper/50">
+              <span className="flex items-center gap-1.5">
+                <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
+                <span className="uppercase tracking-widest">online</span>
+              </span>
+              <span className="text-void/25 dark:text-paper/25">|</span>
+              <span className="index-num">{time}</span>
             </div>
-          </button>
 
-          {/* INQUIRY BUTTON - Premium filled hover */}
-          <button className="hidden md:flex items-center gap-2 group relative px-6 py-2.5 rounded-full overflow-hidden border border-black dark:border-white/20 transition-all">
-            <span className="relative z-10 text-[10px] font-bold uppercase tracking-widest text-black dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
-              Get in touch
-            </span>
-            <ArrowRight size={14} className="relative z-10 text-black dark:text-white group-hover:text-white dark:group-hover:text-black group-hover:translate-x-1 transition-all" />
-            <div className="absolute inset-0 bg-black dark:bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </button>
+            {/* THEME TOGGLE */}
+            <button
+              onClick={toggleTheme}
+              className="flex h-8 w-8 items-center justify-center rounded border border-void/15 dark:border-paper/15 text-void/70 dark:text-paper/70 hover:border-primary hover:text-primary transition-colors"
+              aria-label="Toggle Theme"
+            >
+              {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
+            </button>
 
-          {/* MOBILE TOGGLE */}
-          <button 
-            className="lg:hidden p-2 text-black dark:text-white relative z-[101]" 
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-      </nav>
+            {/* CTA — command */}
+            <a
+              href="mailto:vishalsingh31879@gmail.com"
+              className="hidden md:flex items-center gap-2 rounded border border-primary/40 px-3.5 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-primary glow-cyan hover:bg-primary/10 transition-colors"
+            >
+              &gt; contact
+            </a>
 
-      {/* MOBILE MENU - Fullscreen Overlay */}
-      <div className={`fixed inset-0 bg-white dark:bg-[#030712] z-[99] flex flex-col px-10 justify-center gap-6 transition-all duration-500 ease-in-out ${
-        open ? "opacity-100 visible" : "opacity-0 invisible translate-x-full"
-      }`}>
-        <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-black/40 dark:text-white/30 mb-4">Navigation</p>
+            {/* MOBILE TOGGLE */}
+            <button
+              className="lg:hidden p-2 text-void dark:text-paper relative z-[101]"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      {/* MOBILE NAV — terminal overlay */}
+      <div
+        className={`fixed inset-0 z-[99] flex flex-col px-8 justify-center gap-3 transition-all duration-500 lg:hidden ${
+          open ? "opacity-100 visible bg-void/95 dark:bg-void/95" : "opacity-0 invisible"
+        }`}
+      >
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary/60 mb-6">
+          $ index --all
+        </p>
         {navigations.map((item, index) => (
-          <div 
-            key={item.title} 
-            onClick={() => handleNavigate(item.path)} 
-            className={`group flex items-center justify-between border-b border-black/5 dark:border-white/5 pb-4 transition-all duration-500 ${open ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"}`}
-            style={{ transitionDelay: `${index * 100}ms` }}
+          <div
+            key={item.num}
+            onClick={() => handleNavigate(item.path)}
+            className={`group flex items-center gap-5 py-4 border-b border-paper/10 transition-all duration-500 cursor-pointer ${
+              open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+            style={{ transitionDelay: `${index * 60}ms` }}
           >
-            <span className="text-4xl font-bold tracking-tighter text-black dark:text-white group-hover:text-indigo-600 dark:group-hover:text-[#E6E6FA] transition-colors">
-              {item.title}
+            <span className="index-num text-sm text-primary">{item.num}</span>
+            <span className="font-mono text-2xl font-bold tracking-tight text-paper group-hover:text-primary transition-colors">
+              &gt; {item.title}
             </span>
-            <ArrowRight size={24} className="text-black/20 dark:text-white/20 group-hover:text-indigo-600 dark:group-hover:text-[#E6E6FA] -rotate-45 group-hover:rotate-0 transition-all" />
           </div>
         ))}
       </div>

@@ -18,94 +18,104 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-void/80"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0a0a0a] border border-white/10 shadow-2xl animate-in zoom-in-95 duration-300"
+        className="terminal-window relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white/40 transition-all hover:bg-white/10 hover:text-white"
-          aria-label="Close"
-        >
-          <X size={18} />
-        </button>
+        {/* Title bar */}
+        <div className="sticky top-0 z-10 flex items-center gap-2 border-b border-void/10 dark:border-paper/10 bg-void/80 dark:bg-void/90 px-4 py-2.5 backdrop-blur-sm">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+          <span className="ml-2 index-num font-mono text-[9px] uppercase tracking-widest text-void/50 dark:text-paper/50 truncate">
+            cat {project.title.toLowerCase().replace(/[^a-z0-9]+/g, "_")}.py
+          </span>
+          <button
+            onClick={onClose}
+            className="ml-auto flex h-7 w-7 items-center justify-center rounded border border-void/15 dark:border-paper/15 text-void/60 dark:text-paper/60 hover:border-primary hover:text-primary transition-all"
+            aria-label="Close"
+          >
+            <X size={14} />
+          </button>
+        </div>
 
         {project.coverImage && (
-          <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
+          <div className="relative h-56 md:h-72 overflow-hidden">
             <img
               src={project.coverImage}
               alt={project.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-void/70 via-transparent to-transparent" />
           </div>
         )}
 
         <div className="p-6 md:p-10">
-          <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#E6E6FA]">
-                {project.category || "Project"}
-              </span>
-              <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter uppercase leading-[0.9] mt-2">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-2">
+                [{project.category || "project"}] / {project.status || "selected"}
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-void dark:text-paper leading-tight">
                 {project.title}
               </h2>
             </div>
             <div className="flex gap-3">
-              {project.github && (
+              {project.github && project.github !== "#" && (
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-white/60 transition-all hover:bg-white/10 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded border border-void/15 dark:border-paper/15 px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider text-void/60 dark:text-paper/60 hover:border-primary hover:text-primary transition-all"
                 >
-                  <Github size={14} /> Source
+                  <Github size={14} /> &gt; source
                 </a>
               )}
-              {project.live && (
+              {project.live && project.live !== "#" && (
                 <a
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-xl bg-[#E6E6FA] px-4 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-black transition-all hover:opacity-80"
+                  className="glow-cyan inline-flex items-center gap-2 rounded border border-primary/50 bg-primary/10 px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider font-bold text-primary hover:bg-primary/20 transition-colors"
                 >
-                  <ExternalLink size={14} /> Live
+                  <ExternalLink size={14} /> &gt; deploy
                 </a>
               )}
             </div>
           </div>
 
-          <p className="text-sm md:text-base text-white/60 leading-relaxed max-w-2xl">
+          <p className="font-body text-sm md:text-base text-void/60 dark:text-paper/60 leading-relaxed max-w-2xl">
             {project.description}
           </p>
 
-          {(project.tech && project.tech.length > 0) && (
-            <div className="mt-8 flex flex-wrap gap-2">
+          {project.tech && project.tech.length > 0 && (
+            <div className="mt-7 flex flex-wrap gap-2">
               {project.tech.map((t) => (
                 <span
                   key={t}
-                  className="rounded-lg bg-white/5 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white/50 border border-white/5"
+                  className="rounded bg-void/5 dark:bg-paper/5 px-3 py-1.5 font-mono text-[9px] uppercase tracking-wider text-void/60 dark:text-paper/60"
                 >
-                  {t}
+                  [{t}]
                 </span>
               ))}
             </div>
           )}
 
-          {(project.images && project.images.length > 0) && (
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3">
+          {project.images && project.images.length > 0 && (
+            <div className="mt-7 grid grid-cols-2 md:grid-cols-3 gap-3">
               {project.images.map((img, i) => (
                 <div
                   key={`${img}-${i}`}
-                  className="relative aspect-video overflow-hidden rounded-xl bg-white/5"
+                  className="relative aspect-video overflow-hidden rounded-md bg-surface border border-void/10 dark:border-paper/10"
                 >
                   <img
                     src={img}
                     alt={`${project.title} screenshot ${i + 1}`}
-                    className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
+                    loading="lazy"
+                    className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
                   />
                 </div>
               ))}
