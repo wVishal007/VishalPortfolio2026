@@ -29,13 +29,13 @@ const CertificatesSection = () => {
           cmd="credentials.verify --all"
           title={
             <>
-              Credential <span className="gradient-text">registry</span>
+              Credential <span className="serif-accent">registry</span>
             </>
           }
           description="Credentials issued by cloud platforms, AI programs, and professional learning institutes."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {visibleCertificates.map((cert, index) => (
             <CertificateCard key={index} index={index} {...cert} />
           ))}
@@ -45,7 +45,7 @@ const CertificatesSection = () => {
           <div className="mt-14 flex justify-center">
             <button
               onClick={() => (showAll ? handleShowLess() : setShowAll(true))}
-              className="rounded border border-void/15 dark:border-paper/15 px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-void/60 dark:text-paper/60 hover:border-primary hover:text-primary transition-all inline-flex items-center gap-2"
+              className="rounded border border-void/15 dark:border-paper/15 px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-void/60 dark:text-paper/60 hover:border-primary hover:text-primary hover:glow-cyan transition-all inline-flex items-center gap-2"
             >
               &gt; {showAll ? "collapse" : "expand_all"}
               {showAll ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

@@ -5,7 +5,7 @@ const HudRail = () => (
     className="fixed right-4 top-1/2 -translate-y-1/2 z-[90] hidden lg:flex flex-col items-end gap-3 font-mono text-[9px] uppercase tracking-widest text-void/40 dark:text-paper/40 pointer-events-none"
     aria-hidden="true"
   >
-    <div className="terminal-window rounded px-3 py-2.5 text-right">
+    <div className="aurora-card rounded px-3 py-2.5 text-right">
       <p className="flex items-center justify-end gap-2">
         <span className="eq">
           <span />

@@ -13,13 +13,13 @@ const HobbiesSection = () => {
           cmd="side_processes.poll"
           title={
             <>
-              Side <span className="gradient-text">processes</span>
+              Side <span className="serif-accent">processes</span>
             </>
           }
           description="Refining the human element through diverse disciplines. Curiosity is the primary driver of technical innovation."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {hobbies.map((hobby, index) => (
             <HobbyCard key={index} index={index} {...hobby} />
           ))}

@@ -23,19 +23,9 @@ const ProjectCard = ({
   return (
     <div
       onClick={() => onClick?.(index)}
-      className="terminal-window group rounded-lg overflow-hidden cursor-pointer flex flex-col hover:border-primary/40 transition-all duration-300"
+      className="aurora-card group rounded-xl overflow-hidden cursor-pointer flex flex-col"
     >
-      {/* Title bar */}
-      <div className="flex items-center gap-2 border-b border-void/10 dark:border-paper/10 px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
-        <span className="ml-2 index-num font-mono text-[9px] uppercase tracking-widest text-void/40 dark:text-paper/40 truncate">
-          run: {title.toLowerCase().replace(/[^a-z0-9]+/g, "_")}.py
-        </span>
-      </div>
-
-      <div className="relative aspect-video overflow-hidden bg-surface">
+      <div className="sheen duotone relative aspect-video overflow-hidden bg-surface">
         {cardImage ? (
           <img
             src={cardImage}
@@ -62,6 +52,9 @@ const ProjectCard = ({
             {status}
           </span>
         </div>
+        <span className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-void/60 backdrop-blur-sm text-paper opacity-0 group-hover:opacity-100 transition-opacity">
+          <ArrowUpRight size={14} />
+        </span>
       </div>
 
       <div className="p-6 flex flex-col flex-1">

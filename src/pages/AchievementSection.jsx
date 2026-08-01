@@ -14,13 +14,13 @@ const AchievementsSection = () => {
           cmd="milestones.log"
           title={
             <>
-              Event <span className="gradient-text">log</span>
+              Event <span className="serif-accent">log</span>
             </>
           }
           description="A curated record of competitive excellence across national and international tech circuits."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievements.map((achievement, index) => (
             <AchievementCard key={index} index={index} {...achievement} />
           ))}
