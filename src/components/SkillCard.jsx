@@ -22,15 +22,12 @@ const SkillCard = ({ title, techList, percentage, icon, index }) => {
   }, []);
 
   return (
-    <div className="terminal-window group rounded-lg p-5 flex flex-col gap-4 hover:border-primary/40 transition-all duration-300">
+    <div className="aurora-card group rounded-xl p-5 flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
         <span className="index-num font-mono text-[10px] text-void/40 dark:text-paper/40">
           [mod_{String(index + 1).padStart(2, "0")}]
         </span>
-        <span className="index-num font-mono text-[10px] font-bold text-primary">
-          {pct}%
-        </span>
-        <span className="ml-auto flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-accent">
+        <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-accent">
           <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
           {loaded ? "loaded" : "booting"}
         </span>
@@ -43,6 +40,9 @@ const SkillCard = ({ title, techList, percentage, icon, index }) => {
         <h3 className="font-display text-lg font-bold tracking-tight text-void dark:text-paper group-hover:text-primary transition-colors">
           {title}
         </h3>
+        <span className="ml-auto index-num font-mono text-sm font-bold text-primary">
+          {pct}%
+        </span>
       </div>
 
       <p className="font-mono text-[10px] leading-relaxed text-void/55 dark:text-paper/55">

@@ -29,7 +29,7 @@ const ProjectsSection = () => {
             cmd="projects.run"
             title={
               <>
-                Mission <span className="gradient-text">logs</span>
+                Mission <span className="serif-accent">logs</span>
               </>
             }
           />
@@ -53,7 +53,7 @@ const ProjectsSection = () => {
         </div>
 
         {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredProjects.map((project, index) => (
               <ProjectCard
                 key={index}

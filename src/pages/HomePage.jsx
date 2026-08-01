@@ -11,12 +11,15 @@ import HobbiesSection from "./HobbieSection";
 import AchievementsSection from "./AchievementSection";
 import HudRail from "../components/terminal/HudRail";
 import Divider from "../components/terminal/Divider";
+import Marquee from "../components/terminal/Marquee";
+import useCursorGlow from "../hooks/useCursorGlow";
 
 const HomePage = () => {
   const location = useLocation();
   const progressRef = useRef(null);
   const scrollPctRef = useRef(null);
   const topRef = useRef(null);
+  const cursorGlowRef = useCursorGlow();
 
   const aboutRef = useRef(null);
   const skillsRef = useRef(null);
@@ -102,12 +105,65 @@ const HomePage = () => {
         &gt; scroll 0%
       </div>
 
-      {/* Static glow + grid + scanline backdrop */}
+      {/* Aurora nebula + grid + scanline backdrop */}
       <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-        <div className="glow-bg absolute inset-0" />
-        <div className="grid-bg absolute inset-0 opacity-70" />
+        <div className="aurora breathing absolute inset-0" />
+        <span
+          className="aurora-orb"
+          style={{
+            top: "-14%",
+            left: "6%",
+            width: "46vw",
+            height: "46vw",
+            background: "radial-gradient(circle, rgba(34,211,238,0.16), transparent 62%)",
+            "--ox": "0px",
+            "--oy": "0px",
+            "--ox2": "80px",
+            "--oy2": "-60px",
+            "--dur": "28s",
+          }}
+        />
+        <span
+          className="aurora-orb"
+          style={{
+            bottom: "-18%",
+            right: "-8%",
+            width: "52vw",
+            height: "52vw",
+            background: "radial-gradient(circle, rgba(139,92,246,0.18), transparent 62%)",
+            "--ox": "0px",
+            "--oy": "0px",
+            "--ox2": "-90px",
+            "--oy2": "50px",
+            "--dur": "34s",
+          }}
+        />
+        <span
+          className="aurora-orb"
+          style={{
+            top: "38%",
+            left: "46%",
+            width: "38vw",
+            height: "38vw",
+            background: "radial-gradient(circle, rgba(232,121,249,0.12), transparent 62%)",
+            "--ox": "0px",
+            "--oy": "0px",
+            "--ox2": "60px",
+            "--oy2": "-80px",
+            "--dur": "40s",
+          }}
+        />
+        <div className="light-beam absolute top-0 left-0 right-0 h-40" />
+        <div className="grid-bg absolute inset-0 opacity-60" />
         <div className="scanline absolute inset-0" />
       </div>
+
+      {/* Cursor spotlight */}
+      <div ref={cursorGlowRef} className="cursor-glow" aria-hidden="true" />
+
+      {/* Cinematic grain + vignette */}
+      <div className="grain fixed inset-0 z-[80] pointer-events-none" aria-hidden="true" />
+      <div className="vignette fixed inset-0 z-[80] pointer-events-none" aria-hidden="true" />
 
       {/* HUD status rail */}
       <HudRail />
@@ -127,6 +183,8 @@ const HomePage = () => {
         <section id="about" ref={aboutRef} className="cv-auto">
           <AboutMe />
         </section>
+
+        <Marquee />
 
         <Divider label="enter modules" />
 

@@ -22,20 +22,17 @@ export default function ProjectModal({ project, onClose }) {
       onClick={onClose}
     >
       <div
-        className="terminal-window relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl"
+        className="aurora-card relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Title bar */}
-        <div className="sticky top-0 z-10 flex items-center gap-2 border-b border-void/10 dark:border-paper/10 bg-void/80 dark:bg-void/90 px-4 py-2.5 backdrop-blur-sm">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
-          <span className="ml-2 index-num font-mono text-[9px] uppercase tracking-widest text-void/50 dark:text-paper/50 truncate">
+        {/* Modal header */}
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-void/10 dark:border-paper/10 bg-void/80 dark:bg-void/90 px-4 py-2.5 backdrop-blur-sm rounded-t-xl">
+          <span className="index-num font-mono text-[9px] uppercase tracking-widest text-void/50 dark:text-paper/50 truncate">
             cat {project.title.toLowerCase().replace(/[^a-z0-9]+/g, "_")}.py
           </span>
           <button
             onClick={onClose}
-            className="ml-auto flex h-7 w-7 items-center justify-center rounded border border-void/15 dark:border-paper/15 text-void/60 dark:text-paper/60 hover:border-primary hover:text-primary transition-all"
+            className="flex h-7 w-7 items-center justify-center rounded-full border border-void/15 dark:border-paper/15 text-void/60 dark:text-paper/60 hover:border-primary hover:text-primary transition-all"
             aria-label="Close"
           >
             <X size={14} />
@@ -79,7 +76,7 @@ export default function ProjectModal({ project, onClose }) {
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glow-cyan inline-flex items-center gap-2 rounded border border-primary/50 bg-primary/10 px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider font-bold text-primary hover:bg-primary/20 transition-colors"
+                  className="btn-aurora glow-cyan inline-flex items-center gap-2 rounded px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider font-bold text-void dark:text-paper transition-colors"
                 >
                   <ExternalLink size={14} /> &gt; deploy
                 </a>

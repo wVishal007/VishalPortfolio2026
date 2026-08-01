@@ -76,95 +76,91 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100]">
-      <div className="border-b border-cyan/20 dark:border-cyan/15 bg-void/70 dark:bg-void/75">
-        <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-6 py-3">
-          {/* LOGO — terminal prompt */}
-          <div
-            className="group flex items-center gap-2 cursor-pointer"
-            onClick={() => handleNavigate("/about-me")}
-          >
-            <span className="flex h-7 w-7 items-center justify-center rounded border border-primary/40 text-primary glow-cyan">
-              <TerminalSquare size={14} />
-            </span>
-            <span className="font-mono text-sm font-bold text-void dark:text-paper">
-              ~/vishal
-              <span className="terminal-cursor ml-1.5 hidden sm:inline-block" />
-            </span>
-          </div>
+    <header className="fixed top-0 left-0 right-0 z-[100] px-4 md:px-6 pt-3">
+      <nav className="aurora-card max-w-6xl mx-auto rounded-2xl flex items-center justify-between px-5 md:px-6 py-3">
+        {/* LOGO */}
+        <div
+          className="group flex items-center gap-2.5 cursor-pointer"
+          onClick={() => handleNavigate("/about-me")}
+        >
+          <span className="gradient-bg flex h-7 w-7 items-center justify-center rounded-md text-white glow-shadow">
+            <TerminalSquare size={14} />
+          </span>
+          <span className="font-mono text-sm font-bold text-void dark:text-paper">
+            ~/vishal
+            <span className="terminal-cursor ml-1.5 hidden sm:inline-block" />
+          </span>
+        </div>
 
-          {/* DESKTOP NAV — commands */}
-          <ul className="hidden lg:flex items-center gap-6">
-            {navigations.map((item, i) => {
-              const isActive = i === active;
-              return (
-                <li
-                  key={item.num}
-                  onClick={() => handleNavigate(item.path)}
-                  className="group relative cursor-pointer"
+        {/* DESKTOP NAV */}
+        <ul className="hidden lg:flex items-center gap-1.5">
+          {navigations.map((item, i) => {
+            const isActive = i === active;
+            return (
+              <li
+                key={item.num}
+                onClick={() => handleNavigate(item.path)}
+                className="group relative cursor-pointer"
+              >
+                <span
+                  className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-mono text-[11px] transition-all ${
+                    isActive
+                      ? "bg-primary/10 text-primary"
+                      : "text-void/60 dark:text-paper/60 group-hover:text-primary dark:group-hover:text-primary"
+                  }`}
                 >
                   <span
-                    className={`flex items-center gap-1.5 font-mono text-[11px] transition-colors ${
-                      isActive
-                        ? "text-primary"
-                        : "text-void/60 dark:text-paper/60 group-hover:text-primary dark:group-hover:text-primary"
-                    }`}
+                    className={`index-num ${isActive ? "text-primary" : "text-void/30 dark:text-paper/30"}`}
                   >
-                    <span className="index-num text-void/30 dark:text-paper/30">&gt;</span>
-                    {item.title}
-                    {isActive && (
-                      <span className="ml-0.5 rounded bg-primary/15 px-1 text-[8px] font-bold text-primary">
-                        active
-                      </span>
-                    )}
+                    &gt;
                   </span>
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
-                </li>
-              );
-            })}
-          </ul>
+                  {item.title}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
 
-          <div className="flex items-center gap-2 md:gap-3">
-            {/* STATUS + CLOCK */}
-            <div className="hidden md:flex items-center gap-2 font-mono text-[10px] text-void/50 dark:text-paper/50">
-              <span className="flex items-center gap-1.5">
-                <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
-                <span className="uppercase tracking-widest">online</span>
-              </span>
-              <span className="text-void/25 dark:text-paper/25">|</span>
-              <span className="index-num">{time}</span>
-            </div>
-
-            {/* THEME TOGGLE */}
-            <button
-              onClick={toggleTheme}
-              className="flex h-8 w-8 items-center justify-center rounded border border-void/15 dark:border-paper/15 text-void/70 dark:text-paper/70 hover:border-primary hover:text-primary transition-colors"
-              aria-label="Toggle Theme"
-            >
-              {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
-            </button>
-
-            {/* CTA — command */}
-            <a
-              href="mailto:vishalsingh31879@gmail.com"
-              className="hidden md:flex items-center gap-2 rounded border border-primary/40 px-3.5 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-primary glow-cyan hover:bg-primary/10 transition-colors"
-            >
-              &gt; contact
-            </a>
-
-            {/* MOBILE TOGGLE */}
-            <button
-              className="lg:hidden p-2 text-void dark:text-paper relative z-[101]"
-              onClick={() => setOpen(!open)}
-              aria-label="Toggle menu"
-            >
-              {open ? <X size={24} /> : <Menu size={24} />}
-            </button>
+        <div className="flex items-center gap-2 md:gap-3">
+          {/* STATUS + CLOCK */}
+          <div className="hidden md:flex items-center gap-2 font-mono text-[10px] text-void/50 dark:text-paper/50">
+            <span className="flex items-center gap-1.5">
+              <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
+              <span className="uppercase tracking-widest">online</span>
+            </span>
+            <span className="text-void/25 dark:text-paper/25">|</span>
+            <span className="index-num">{time}</span>
           </div>
-        </nav>
-      </div>
 
-      {/* MOBILE NAV — terminal overlay */}
+          {/* THEME TOGGLE */}
+          <button
+            onClick={toggleTheme}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-void/15 dark:border-paper/15 text-void/70 dark:text-paper/70 hover:border-primary hover:text-primary transition-colors"
+            aria-label="Toggle Theme"
+          >
+            {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
+          </button>
+
+          {/* CTA */}
+          <a
+            href="mailto:vishalsingh31879@gmail.com"
+            className="btn-aurora hidden md:flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-void dark:text-paper"
+          >
+            &gt; contact
+          </a>
+
+          {/* MOBILE TOGGLE */}
+          <button
+            className="lg:hidden p-2 text-void dark:text-paper relative z-[101]"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* MOBILE NAV */}
       <div
         className={`fixed inset-0 z-[99] flex flex-col px-8 justify-center gap-3 transition-all duration-500 lg:hidden ${
           open ? "opacity-100 visible bg-void/95 dark:bg-void/95" : "opacity-0 invisible"
@@ -183,7 +179,7 @@ const Navbar = () => {
             style={{ transitionDelay: `${index * 60}ms` }}
           >
             <span className="index-num text-sm text-primary">{item.num}</span>
-            <span className="font-mono text-2xl font-bold tracking-tight text-paper group-hover:text-primary transition-colors">
+            <span className="font-display text-2xl font-bold tracking-tight text-paper group-hover:text-primary transition-colors">
               &gt; {item.title}
             </span>
           </div>

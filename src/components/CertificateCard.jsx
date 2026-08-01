@@ -6,19 +6,16 @@ const CertificateCard = ({ title, provider, image, credentialUrl, index }) => {
 
   return (
     <>
-      <div className="terminal-window group rounded-lg overflow-hidden flex flex-col hover:border-primary/40 transition-all duration-300">
-        {/* Title bar */}
-        <div className="flex items-center gap-2 border-b border-void/10 dark:border-paper/10 px-4 py-2.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
-          <span className="ml-2 index-num font-mono text-[9px] uppercase tracking-widest text-void/40 dark:text-paper/40">
+      <div className="aurora-card group rounded-xl overflow-hidden flex flex-col">
+        <div className="flex items-center justify-between gap-2 px-4 py-2.5">
+          <span className="index-num font-mono text-[9px] uppercase tracking-widest text-void/40 dark:text-paper/40">
             verify 0x{String((index ?? 0) + 1).padStart(2, "0")}
           </span>
+          <BadgeCheck size={13} className="text-primary" />
         </div>
 
         <div
-          className="relative aspect-[4/3] overflow-hidden bg-surface cursor-pointer"
+          className="sheen duotone relative aspect-[4/3] overflow-hidden bg-surface cursor-pointer"
           onClick={() => setIsOpen(true)}
         >
           <img
@@ -74,7 +71,7 @@ const CertificateCard = ({ title, provider, image, credentialUrl, index }) => {
               &gt; close <X size={15} />
             </button>
 
-            <div className="terminal-window rounded-xl overflow-hidden">
+            <div className="aurora-card rounded-xl overflow-hidden">
               <div className="p-4 bg-void/5 dark:bg-paper/5">
                 <img
                   src={image}
@@ -96,7 +93,7 @@ const CertificateCard = ({ title, provider, image, credentialUrl, index }) => {
                     href={credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glow-cyan w-full md:w-auto px-8 py-4 rounded border border-primary/50 bg-primary/10 font-mono text-[11px] font-bold uppercase tracking-widest text-primary hover:bg-primary/20 transition-colors flex items-center justify-center gap-2"
+                    className="btn-aurora glow-cyan w-full md:w-auto px-8 py-4 rounded font-mono text-[11px] font-bold uppercase tracking-widest text-void dark:text-paper flex items-center justify-center gap-2"
                   >
                     &gt; verify_credential <ExternalLink size={13} />
                   </a>

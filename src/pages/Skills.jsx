@@ -13,13 +13,13 @@ const SkillsSection = () => {
           cmd="skills.load"
           title={
             <>
-              Skill <span className="gradient-text">modules</span>
+              Skill <span className="serif-accent">modules</span>
             </>
           }
           description="Architecting autonomous logic with Next.js orchestration and PyTorch deep learning. Built for scale, designed for humans."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {skills.map((skill, index) => (
             <SkillCard key={index} index={index} {...skill} />
           ))}

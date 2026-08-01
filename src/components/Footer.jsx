@@ -22,12 +22,11 @@ const Footer = () => {
   return (
     <footer className="relative px-4 md:px-6 pb-8 text-void dark:text-paper">
       <div className="max-w-6xl mx-auto">
-        {/* CTA — terminal prompt */}
-        <div className="terminal-window hud-corners relative rounded-xl p-10 md:p-16 text-center">
-          <div className="glow-bg absolute inset-0" />
-          <div className="scanline absolute inset-0" />
+        {/* CTA — aurora bloom */}
+        <div className="aurora-card hud-corners reveal relative overflow-hidden rounded-xl p-10 md:p-16 text-center">
+          <div className="hero-bloom absolute inset-0" />
           <div className="relative">
-            <span className="inline-flex items-center gap-2 rounded border border-primary/40 bg-primary/10 px-4 py-1.5 font-mono text-[10px] uppercase tracking-widest text-primary">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 font-mono text-[10px] uppercase tracking-widest text-primary">
               <TerminalSquare size={12} /> open to partnerships &amp; consulting
             </span>
             <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-void/50 dark:text-paper/50">
@@ -36,11 +35,11 @@ const Footer = () => {
             <h2 className="mt-4 font-display font-bold tracking-tight leading-[0.95] text-[clamp(2.5rem,8vw,6rem)] text-void dark:text-paper">
               Let's build something
               <br />
-              <span className="gradient-text text-glow-cyan">worth shipping.</span>
+              <span className="serif-accent text-glow-magenta">worth shipping.</span>
             </h2>
             <a
               href="mailto:vishalsingh31879@gmail.com"
-              className="glow-cyan group mt-10 inline-flex items-center gap-3 rounded border border-primary/50 bg-primary/10 px-8 py-4 font-mono text-[11px] font-bold uppercase tracking-widest text-primary hover:bg-primary/20 transition-colors"
+              className="btn-aurora group mt-10 inline-flex items-center gap-3 rounded-full px-8 py-4 font-mono text-[11px] font-bold uppercase tracking-widest text-void dark:text-paper"
             >
               &gt; send_transmission
               <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -52,7 +51,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mt-14">
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded border border-primary/40 text-primary glow-cyan">
+              <span className="gradient-bg flex h-7 w-7 items-center justify-center rounded-md text-white glow-shadow">
                 <TerminalSquare size={14} />
               </span>
               <span className="font-mono text-sm font-bold">

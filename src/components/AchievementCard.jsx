@@ -2,8 +2,8 @@ import React from "react";
 
 const AchievementCard = ({ title, description, image, meta, highlight, index }) => {
   return (
-    <div className="terminal-window group rounded-lg overflow-hidden flex flex-col hover:border-primary/40 transition-all duration-300">
-      <div className="relative aspect-video overflow-hidden bg-surface">
+    <div className="aurora-card group rounded-xl overflow-hidden flex flex-col">
+      <div className="sheen duotone relative aspect-video overflow-hidden bg-surface">
         <img
           src={image}
           alt={title}
