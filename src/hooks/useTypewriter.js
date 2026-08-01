@@ -1,30 +1,29 @@
 import { useEffect, useState } from "react";
 
-export function useTypewriter(text, speed = 80, enabled = true) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
+const useTypewriter = (text, speed = 42, startDelay = 800) => {
+  const [output, setOutput] = useState("");
 
   useEffect(() => {
-    if (!enabled) {
-      setDisplayed(text);
-      setDone(true);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setOutput(text);
       return;
     }
-
-    setDisplayed("");
-    setDone(false);
     let i = 0;
-    const interval = setInterval(() => {
-      i++;
-      setDisplayed(text.slice(0, i));
-      if (i >= text.length) {
-        clearInterval(interval);
-        setDone(true);
-      }
-    }, speed);
+    let tick;
+    const timeout = setTimeout(() => {
+      tick = setInterval(() => {
+        i += 1;
+        setOutput(text.slice(0, i));
+        if (i >= text.length) clearInterval(tick);
+      }, speed);
+    }, startDelay);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(tick);
+    };
+  }, [text, speed, startDelay]);
 
-    return () => clearInterval(interval);
-  }, [text, speed, enabled]);
+  return output;
+};
 
-  return { displayed, done };
-}
+export default useTypewriter;

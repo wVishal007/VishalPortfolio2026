@@ -1,85 +1,46 @@
-import React, { useRef, useEffect, useState } from "react";
-import { Trophy, ArrowUpRight } from "lucide-react";
+import React from "react";
 
-const AchievementCard = ({ title, description, image, meta, highlight }) => {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const onMove = (e) => {
-      const rect = el.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      setTilt({ x: x * 4, y: -y * 4 });
-    };
-
-    const onLeave = () => setTilt({ x: 0, y: 0 });
-
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
-    return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
+const AchievementCard = ({ title, description, image, meta, highlight, index }) => {
   return (
-    <div
-      ref={ref}
-      className="group relative bg-[#0a0a0a] border border-white/5 hover:border-[#E6E6FA]/30 transition-all duration-700 flex flex-col h-full min-h-[500px] overflow-hidden"
-      style={{
-        transform: `perspective(800px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
-        transformStyle: "preserve-3d",
-      }}
-    >
-      <div className="relative aspect-video w-full overflow-hidden bg-[#111] shrink-0">
+    <div className="terminal-window group rounded-lg overflow-hidden flex flex-col hover:border-primary/40 transition-all duration-300">
+      <div className="relative aspect-video overflow-hidden bg-surface">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+          loading="lazy"
+          className="w-full h-full object-cover opacity-95 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-transparent opacity-60" />
-
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-void/70 to-transparent" />
         {highlight && (
-          <div className="absolute top-4 left-4 md:top-6 md:left-6 px-3 py-1 bg-white text-black text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em] z-10">
-            {highlight}
-          </div>
+          <span className="rounded bg-void/70 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-primary flex items-center gap-1.5 absolute top-4 left-4">
+            <span className="pulse-dot h-1 w-1 rounded-full bg-primary" />
+            [{highlight}]
+          </span>
         )}
+        <span className="index-num absolute top-4 right-4 rounded bg-void/70 px-2 py-1 font-mono text-[9px] text-paper">
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
 
-      <div className="p-6 md:p-8 flex flex-col flex-grow relative">
-        <div className="space-y-4 md:space-y-5">
-          <div className="flex items-start justify-between gap-4">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-white tracking-tighter uppercase leading-[1.1] group-hover:text-[#E6E6FA] transition-colors">
-              {title}
-            </h3>
-            <Trophy className="text-[#E6E6FA] shrink-0 opacity-20 group-hover:opacity-100 transition-all duration-500" size={20} />
-          </div>
+      <div className="p-6 flex flex-col flex-1">
+        <h3 className="font-display text-xl font-bold tracking-tight text-void dark:text-paper group-hover:text-primary transition-colors leading-tight">
+          {title}
+        </h3>
+        <p className="mt-3 font-body text-sm text-void/60 dark:text-paper/60 leading-relaxed">
+          {description}
+        </p>
 
-          <p className="text-gray-500 text-sm leading-relaxed font-medium line-clamp-4 group-hover:line-clamp-none transition-all duration-300">
-            {description}
-          </p>
-        </div>
-
-        <div className="mt-auto pt-8 border-t border-white/5 flex flex-wrap items-center gap-x-4 gap-y-2">
-          {meta.map((item, index) => (
+        <div className="flex flex-wrap gap-x-3 gap-y-1.5 mt-auto pt-5 border-t border-void/10 dark:border-paper/10">
+          {meta.map((item) => (
             <span
-              key={index}
-              className="text-[9px] font-black uppercase tracking-[0.2em] text-white/20 group-hover:text-[#E6E6FA]/80 transition-colors italic"
+              key={item}
+              className="rounded bg-void/5 dark:bg-paper/5 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-void/50 dark:text-paper/50"
             >
-              // {item}
+              [{item}]
             </span>
           ))}
-          <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
-            <ArrowUpRight size={16} className="text-[#E6E6FA]" />
-          </div>
         </div>
       </div>
-
-      <div className="absolute -z-10 bottom-0 right-0 w-32 h-32 bg-[#E6E6FA]/5 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
     </div>
   );
 };
