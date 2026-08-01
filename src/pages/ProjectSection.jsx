@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
+import ProjectModal from "../components/ProjectModal";
 import { usePortfolio } from "../context/portfolio";
 
 const categories = ["All", "Web", "AI/ML"];
@@ -7,6 +8,7 @@ const categories = ["All", "Web", "AI/ML"];
 const ProjectsSection = () => {
   const { projects } = usePortfolio();
   const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const filteredProjects = activeCategory === "All"
     ? projects
@@ -63,7 +65,12 @@ const ProjectsSection = () => {
         <div className="border-t border-black/[0.08] dark:border-white/[0.08]">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project, index) => (
-              <ProjectCard key={index} index={index} {...project} />
+              <ProjectCard
+                key={index}
+                index={index}
+                {...project}
+                onClick={(i) => setSelectedProject(filteredProjects[i])}
+              />
             ))
           ) : (
             <div className="py-40 text-center">
@@ -85,10 +92,17 @@ const ProjectsSection = () => {
               Vishal Singh // Systems_Architect // 2026
             </p>
           </div>
-        </footer>
-      </div>
-    </section>
-  );
-};
+         </footer>
+       </div>
+
+       {selectedProject && (
+         <ProjectModal
+           project={selectedProject}
+           onClose={() => setSelectedProject(null)}
+         />
+       )}
+     </section>
+   );
+ };
 
 export default ProjectsSection;

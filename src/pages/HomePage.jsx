@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import AboutMe from "./AboutMe";
@@ -6,19 +6,23 @@ import SkillsSection from "./Skills";
 import ProjectsSection from "./ProjectSection";
 import CertificatesSection from "./CertificationSection";
 import Footer from "../components/Footer";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 import HobbiesSection from "./HobbieSection";
 import AchievementsSection from "./AchievementSection";
+import Loader from "../components/Loader";
+import CustomCursor from "../components/CustomCursor";
+import SectionNav from "../components/SectionNav";
 
 const HomePage = () => {
   const location = useLocation();
+  const [, setLoading] = useState(true);
 
   const aboutRef = useRef(null);
   const skillsRef = useRef(null);
   const projectsRef = useRef(null);
   const certRef = useRef(null);
-  const HobbyRef = useRef(null);
-  const AchieveRef = useRef(null);
+  const hobbyRef = useRef(null);
+  const achieveRef = useRef(null);
 
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/about-me") {
@@ -34,43 +38,47 @@ const HomePage = () => {
       certRef.current?.scrollIntoView({ behavior: "smooth" });
     }
     if (location.pathname === "/Hobbies") {
-      HobbyRef.current?.scrollIntoView({ behavior: "smooth" });
+      hobbyRef.current?.scrollIntoView({ behavior: "smooth" });
     }
     if (location.pathname === "/Achievements") {
-      AchieveRef.current?.scrollIntoView({ behavior: "smooth" });
+      achieveRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [location.pathname]);
 
   return (
     <div className="w-screen max-w-screen">
-      <Navbar />
-      <Analytics/>
+      <Loader onComplete={() => setLoading(false)} />
+      <CustomCursor />
+      <SectionNav />
 
-      <section ref={aboutRef}>
+      <Navbar />
+      <Analytics />
+
+      <section id="about" ref={aboutRef}>
         <AboutMe />
       </section>
 
-      <section ref={skillsRef}>
+      <section id="skills" ref={skillsRef}>
         <SkillsSection />
       </section>
 
-      <section ref={projectsRef}>
+      <section id="projects" ref={projectsRef}>
         <ProjectsSection />
       </section>
 
-      <section ref={certRef}>
+      <section id="certs" ref={certRef}>
         <CertificatesSection />
       </section>
 
-      <section ref={AchieveRef}>
-        <AchievementsSection/>
+      <section id="achievements" ref={achieveRef}>
+        <AchievementsSection />
       </section>
 
-        <section ref={HobbyRef}>
-          <HobbiesSection />
-        </section>
+      <section id="hobbies" ref={hobbyRef}>
+        <HobbiesSection />
+      </section>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };

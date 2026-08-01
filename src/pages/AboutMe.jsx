@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import mypic from "../assets/mypic-5.png";
 import { Github, Linkedin, Mail, Command, ChevronRight } from "lucide-react";
 import { usePortfolio } from "../context/portfolio";
+import { useTypewriter } from "../hooks/useTypewriter";
 
 const AboutMe = () => {
   const { profile } = usePortfolio();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const roleText = profile.role || "Full-Stack AI Architect";
+  const { displayed: typedRole } = useTypewriter(roleText, 60, true);
 
   useEffect(() => {
     const handleMove = (e) => {
@@ -85,8 +88,9 @@ const AboutMe = () => {
             <header className="space-y-6">
                <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08]">
                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-[#E6E6FA]" />
-                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/60">
-                   {profile.role || "Full-Stack AI Architect"}
+                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/60 font-mono">
+                   {typedRole}
+                   <span className="animate-pulse">|</span>
                  </span>
                </div>
               
