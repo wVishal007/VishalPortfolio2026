@@ -1,8 +1,9 @@
 import React from "react";
 import SkillRow from "../components/SkillCard";
-import { skills } from "../data/skillData";
+import { usePortfolio } from "../context/portfolio";
 
 const SkillsSection = () => {
+  const { skills } = usePortfolio();
   return (
     <section className="relative w-full py-24 md:py-32 px-6 bg-[#fdfdfd] dark:bg-[#030712] overflow-hidden transition-colors duration-500">
       

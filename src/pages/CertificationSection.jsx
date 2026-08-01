@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
-import { certificates } from "../data/certificateData";
 import CertificateCard from "../components/CertificateCard";
+import { usePortfolio } from "../context/portfolio";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 const CertificatesSection = () => {
+  const { certificates } = usePortfolio();
   const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef(null);
 

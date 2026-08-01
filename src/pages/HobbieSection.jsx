@@ -1,9 +1,9 @@
 import React from "react";
 import HobbyCard from "../components/personal/HobbyCard";
-// import { hobbies } from "../data/hobbyData";
+import { usePortfolio } from "../context/portfolio";
 
-
-const HobbiesSection = ({ hobbies = [] }) => {
+const HobbiesSection = () => {
+  const { hobbies } = usePortfolio();
   return (
     <section className="relative w-full py-32 md:py-48 bg-[#FAFAFA] dark:bg-[#0a0a0a] transition-colors duration-700 overflow-hidden">
       

@@ -3,20 +3,12 @@ import HomePage from './pages/HomePage'
 
 function App() {
   const browserRouter = createBrowserRouter([{
-  path: "/",
-  element: <HomePage />,
-  children: [
-    { path: "about-me" },
-    { path: "skills" },
-    { path: "projects" },
-    { path: "certifications" },
-    { path: "Hobbies" },
-    { path: "Achievements" },
-  ]
-}])
+    path: "*",
+    element: <HomePage />,
+  }])
 
   return (
-  <RouterProvider router={browserRouter}/>
+    <RouterProvider router={browserRouter}/>
   )
 }
 
