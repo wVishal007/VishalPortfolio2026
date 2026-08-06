@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Menu, X, Sun, Moon, TerminalSquare } from "lucide-react";
+import { Menu, X, Sun, Moon, TerminalSquare, Monitor, Mail } from "lucide-react";
+import { usePortfolio } from "../context/portfolio";
+import useTheme from "../hooks/useTheme";
+import Magnetic from "../components/ui/Magnetic";
 
 const navigations = [
   { title: "home", path: "/about-me", num: "01" },
@@ -13,16 +16,14 @@ const navigations = [
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { profile } = usePortfolio();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const [time, setTime] = useState(() =>
     new Date().toLocaleTimeString("en-GB", { hour12: false })
   );
 
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem("theme");
-    return saved ? saved === "dark" : true;
-  });
+  const { mode, cycle, icon } = useTheme();
 
   useEffect(() => {
     const ids = ["about", "skills", "projects", "certs", "achievements", "hobbies"];
@@ -45,19 +46,6 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.add("dark");
-      root.classList.remove("light");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      root.classList.add("light");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDarkMode]);
-
-  useEffect(() => {
     const id = setInterval(() => {
       setTime(new Date().toLocaleTimeString("en-GB", { hour12: false }));
     }, 1000);
@@ -67,8 +55,6 @@ const Navbar = () => {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "unset";
   }, [open]);
-
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   const handleNavigate = (path) => {
     setOpen(false);
@@ -122,32 +108,42 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-2 md:gap-3">
-          {/* STATUS + CLOCK */}
+          {/* STATUS + CLOCK + AVAILABILITY */}
           <div className="hidden md:flex items-center gap-2 font-mono text-[10px] text-void/50 dark:text-paper/50">
             <span className="flex items-center gap-1.5">
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
               <span className="uppercase tracking-widest">online</span>
             </span>
+            {profile.availability?.available && (
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded border border-accent/30 bg-accent/10 text-accent">
+                <span className="pulse-dot h-1 w-1 rounded-full bg-accent" />
+                <span className="uppercase tracking-widest text-[9px]">{profile.availability.note || "available"}</span>
+              </span>
+            )}
             <span className="text-void/25 dark:text-paper/25">|</span>
             <span className="index-num">{time}</span>
           </div>
 
-          {/* THEME TOGGLE */}
+{/* THEME TOGGLE */}
           <button
-            onClick={toggleTheme}
+            onClick={cycle}
             className="flex h-8 w-8 items-center justify-center rounded-full border border-void/15 dark:border-paper/15 text-void/70 dark:text-paper/70 hover:border-primary hover:text-primary transition-colors"
-            aria-label="Toggle Theme"
+            aria-label={`Theme: ${mode}. Click to cycle.`}
           >
-            {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
+            {icon === "Sun" && <Sun size={14} />}
+            {icon === "Moon" && <Moon size={14} />}
+            {icon === "Monitor" && <Monitor size={14} />}
           </button>
 
           {/* CTA */}
-          <a
-            href="mailto:vishalsingh31879@gmail.com"
-            className="btn-aurora hidden md:flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-void dark:text-paper"
-          >
-            &gt; contact
-          </a>
+          <Magnetic strength={0.2}>
+            <a
+              href={profile.socials?.mail || "mailto:vishalsingh31879@gmail.com"}
+              className="btn-aurora hidden md:flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-void dark:text-paper"
+            >
+              <Mail size={14} /> {" >"} contact
+            </a>
+          </Magnetic>
 
           {/* MOBILE TOGGLE */}
           <button

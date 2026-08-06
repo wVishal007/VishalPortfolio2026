@@ -12,6 +12,7 @@ import AchievementsSection from "./AchievementSection";
 import HudRail from "../components/terminal/HudRail";
 import Divider from "../components/terminal/Divider";
 import Marquee from "../components/terminal/Marquee";
+import BootOverlay from "../components/terminal/BootOverlay";
 import useCursorGlow from "../hooks/useCursorGlow";
 
 const HomePage = () => {
@@ -19,7 +20,7 @@ const HomePage = () => {
   const progressRef = useRef(null);
   const scrollPctRef = useRef(null);
   const topRef = useRef(null);
-  const cursorGlowRef = useCursorGlow();
+  const { glowRef, mousePos } = useCursorGlow();
 
   const aboutRef = useRef(null);
   const skillsRef = useRef(null);
@@ -84,10 +85,38 @@ const HomePage = () => {
     };
   }, []);
 
+  /* Card spotlight — delegated mousemove to set --sx/--sy on hovered .aurora-card */
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    let ticking = false;
+    const onMove = (e) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const card = e.target.closest(".aurora-card");
+        if (card) {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty("--sx", `${e.clientX - r.left}px`);
+          card.style.setProperty("--sy", `${e.clientY - r.top}px`);
+        } else {
+          document.querySelectorAll(".aurora-card").forEach((c) => {
+            c.style.removeProperty("--sx");
+            c.style.removeProperty("--sy");
+          });
+        }
+        ticking = false;
+      });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div className="relative">
+      <BootOverlay />
       {/* Gradient scroll progress */}
       <div
         ref={progressRef}
@@ -121,6 +150,8 @@ const HomePage = () => {
             "--ox2": "80px",
             "--oy2": "-60px",
             "--dur": "28s",
+            "--mx": `${(mousePos.x - 0.5) * 40}px`,
+            "--my": `${(mousePos.y - 0.5) * 40}px`,
           }}
         />
         <span
@@ -136,6 +167,8 @@ const HomePage = () => {
             "--ox2": "-90px",
             "--oy2": "50px",
             "--dur": "34s",
+            "--mx": `${(mousePos.x - 0.5) * -30}px`,
+            "--my": `${(mousePos.y - 0.5) * -30}px`,
           }}
         />
         <span
@@ -151,6 +184,8 @@ const HomePage = () => {
             "--ox2": "60px",
             "--oy2": "-80px",
             "--dur": "40s",
+            "--mx": `${(mousePos.x - 0.5) * 20}px`,
+            "--my": `${(mousePos.y - 0.5) * 20}px`,
           }}
         />
         <div className="light-beam absolute top-0 left-0 right-0 h-40" />
@@ -159,7 +194,7 @@ const HomePage = () => {
       </div>
 
       {/* Cursor spotlight */}
-      <div ref={cursorGlowRef} className="cursor-glow" aria-hidden="true" />
+      <div ref={glowRef} className="cursor-glow" aria-hidden="true" />
 
       {/* Cinematic grain + vignette */}
       <div className="grain fixed inset-0 z-[80] pointer-events-none" aria-hidden="true" />

@@ -23,6 +23,7 @@ const SkillCard = ({ title, techList, percentage, icon, index }) => {
 
   return (
     <div className="aurora-card group rounded-xl p-5 flex flex-col gap-4">
+      <span className="card-spot" aria-hidden="true" />
       <div className="flex items-center justify-between gap-3">
         <span className="index-num font-mono text-[10px] text-void/40 dark:text-paper/40">
           [mod_{String(index + 1).padStart(2, "0")}]

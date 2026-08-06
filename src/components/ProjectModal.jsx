@@ -1,5 +1,27 @@
+import { createPortal } from "react-dom";
 import { useEffect } from "react";
 import { X, ExternalLink, Github } from "lucide-react";
+
+const getStatusConfig = (status, live) => {
+  const s = (status || (live && live !== "#" ? "deployed" : "local")).toLowerCase();
+  switch (s) {
+    case "deployed":
+    case "live":
+    case "production":
+      return { bg: "bg-accent/10", border: "border-accent/30", text: "text-accent", dot: "bg-accent", label: "deployed" };
+    case "staging":
+    case "preview":
+      return { bg: "bg-primary/10", border: "border-primary/30", text: "text-primary", dot: "bg-primary", label: "staging" };
+    case "archived":
+    case "deprecated":
+      return { bg: "bg-void/10 dark:bg-paper/10", border: "border-void/20 dark:border-paper/20", text: "text-void/50 dark:text-paper/50", dot: "bg-void/50 dark:bg-paper/50", label: "archived" };
+    case "local":
+    case "development":
+    case "dev":
+    default:
+      return { bg: "bg-amber-500/10", border: "border-amber-500/30", text: "text-amber-400", dot: "bg-amber-400", label: "local" };
+  }
+};
 
 export default function ProjectModal({ project, onClose }) {
   useEffect(() => {
@@ -16,7 +38,7 @@ export default function ProjectModal({ project, onClose }) {
 
   if (!project) return null;
 
-  return (
+  const modal = (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-void/80"
       onClick={onClose}
@@ -53,8 +75,14 @@ export default function ProjectModal({ project, onClose }) {
         <div className="p-6 md:p-10">
           <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-2">
-                [{project.category || "project"}] / {project.status || "selected"}
+              <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-2 flex items-center gap-2">
+                <span className="rounded bg-void/70 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-primary">
+                  [{project.category || "project"}]
+                </span>
+                <span className={`rounded ${getStatusConfig(project.status, project.live).bg} border ${getStatusConfig(project.status, project.live).border} px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-widest flex items-center gap-1.5 ${getStatusConfig(project.status, project.live).text}`}>
+                  <span className={`pulse-dot h-1 w-1 rounded-full ${getStatusConfig(project.status, project.live).dot}`} />
+                  {getStatusConfig(project.status, project.live).label}
+                </span>
               </p>
               <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-void dark:text-paper leading-tight">
                 {project.title}
@@ -68,7 +96,7 @@ export default function ProjectModal({ project, onClose }) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded border border-void/15 dark:border-paper/15 px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider text-void/60 dark:text-paper/60 hover:border-primary hover:text-primary transition-all"
                 >
-                  <Github size={14} /> &gt; source
+                  <Github size={14} /> {" >"} source
                 </a>
               )}
               {project.live && project.live !== "#" && (
@@ -78,7 +106,7 @@ export default function ProjectModal({ project, onClose }) {
                   rel="noopener noreferrer"
                   className="btn-aurora glow-cyan inline-flex items-center gap-2 rounded px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider font-bold text-void dark:text-paper transition-colors"
                 >
-                  <ExternalLink size={14} /> &gt; deploy
+                  <ExternalLink size={14} /> {" >"} deploy
                 </a>
               )}
             </div>
@@ -122,4 +150,6 @@ export default function ProjectModal({ project, onClose }) {
       </div>
     </div>
   );
+
+  return createPortal(modal, document.body);
 }
