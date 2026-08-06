@@ -1,13 +1,18 @@
 import React from "react";
 import { Github, Linkedin, Mail, TerminalSquare, ArrowUpRight } from "lucide-react";
+import { usePortfolio } from "../context/portfolio";
+import { useNavigate } from "react-router-dom";
+import Magnetic from "../components/ui/Magnetic";
 
 const Footer = () => {
+  const { profile } = usePortfolio();
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { name: "github", icon: <Github size={14} />, url: "https://github.com/wVishal007" },
-    { name: "linkedin", icon: <Linkedin size={14} />, url: "https://www.linkedin.com/in/vishal-singh-188013324/" },
-    { name: "mail", icon: <Mail size={14} />, url: "mailto:vishalsingh31879@gmail.com" },
+    { name: "github", icon: <Github size={14} />, url: profile.socials?.github || "https://github.com/wVishal007" },
+    { name: "linkedin", icon: <Linkedin size={14} />, url: profile.socials?.linkedin || "https://www.linkedin.com/in/vishal-singh-188013324/" },
+    { name: "mail", icon: <Mail size={14} />, url: profile.socials?.mail || "mailto:vishalsingh31879@gmail.com" },
   ];
 
   const directory = [
@@ -37,13 +42,15 @@ const Footer = () => {
               <br />
               <span className="serif-accent text-glow-magenta">worth shipping.</span>
             </h2>
+<Magnetic strength={0.25}>
             <a
-              href="mailto:vishalsingh31879@gmail.com"
+              href={profile.socials?.mail || "mailto:vishalsingh31879@gmail.com"}
               className="btn-aurora group mt-10 inline-flex items-center gap-3 rounded-full px-8 py-4 font-mono text-[11px] font-bold uppercase tracking-widest text-void dark:text-paper"
             >
-              &gt; send_transmission
+              {" >"} send_transmission
               <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
+          </Magnetic>
           </div>
         </div>
 
@@ -68,12 +75,16 @@ const Footer = () => {
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-void/40 dark:text-paper/40">
               $ index
             </p>
-            <ul className="flex flex-col gap-1">
+<ul className="flex flex-col gap-1">
               {directory.map((item) => (
-                <li key={item.num} className="flex items-center gap-3 py-1">
+                <li
+                  key={item.num}
+                  onClick={() => navigate(item.path)}
+                  className="group flex items-center gap-3 py-1 cursor-pointer"
+                >
                   <span className="index-num text-[10px] text-primary">{item.num}</span>
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-void/60 dark:text-paper/60">
-                    &gt; {item.name}
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-void/60 dark:text-paper/60 group-hover:text-primary transition-colors">
+                    {" >"} {item.name}
                   </span>
                 </li>
               ))}
@@ -105,13 +116,21 @@ const Footer = () => {
           <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-void/40 dark:text-paper/40">
             © {currentYear} vishal_singh
           </p>
-          <p className="index-num font-mono text-[9px] uppercase tracking-[0.25em] text-void/40 dark:text-paper/40 flex items-center gap-1.5">
-            <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
-            system:online // IND/DL_SKL
-          </p>
-          <p className="index-num font-mono text-[9px] uppercase tracking-[0.25em] text-primary">
-            01—06 / end_of_file
-          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <p className="index-num font-mono text-[9px] uppercase tracking-[0.25em] text-void/40 dark:text-paper/40 flex items-center gap-1.5">
+              <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
+              system:online // IND/DL_SKL
+            </p>
+            {profile.availability?.available && (
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded border border-accent/30 bg-accent/10 text-accent font-mono text-[9px] uppercase tracking-widest">
+                <span className="pulse-dot h-1 w-1 rounded-full bg-accent" />
+                {profile.availability.note || "available"}
+              </span>
+            )}
+            <p className="index-num font-mono text-[9px] uppercase tracking-[0.25em] text-primary">
+              01—06 / end_of_file
+            </p>
+          </div>
         </div>
       </div>
     </footer>

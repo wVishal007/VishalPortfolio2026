@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const useCursorGlow = () => {
   const glowRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     const el = glowRef.current;
@@ -17,6 +18,10 @@ const useCursorGlow = () => {
       requestAnimationFrame(() => {
         const half = el.offsetWidth / 2;
         el.style.transform = `translate3d(${e.clientX - half}px, ${e.clientY - half}px, 0)`;
+        setMousePos({
+          x: e.clientX / window.innerWidth,
+          y: e.clientY / window.innerHeight,
+        });
         ticking = false;
       });
     };
@@ -25,7 +30,7 @@ const useCursorGlow = () => {
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
-  return glowRef;
+  return { glowRef, mousePos };
 };
 
 export default useCursorGlow;

@@ -3,6 +3,7 @@ import React from "react";
 const AchievementCard = ({ title, description, image, meta, highlight, index }) => {
   return (
     <div className="aurora-card group rounded-xl overflow-hidden flex flex-col">
+      <span className="card-spot" aria-hidden="true" />
       <div className="sheen duotone relative aspect-video overflow-hidden bg-surface">
         <img
           src={image}

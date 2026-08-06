@@ -3,6 +3,7 @@ import React from "react";
 const HobbyCard = ({ title, description, image, tags, index }) => {
   return (
     <div className="aurora-card group rounded-xl overflow-hidden flex flex-col">
+      <span className="card-spot" aria-hidden="true" />
       <div className="sheen duotone relative aspect-[4/3] overflow-hidden bg-surface">
         <img
           src={image}

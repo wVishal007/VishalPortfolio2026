@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { usePortfolio } from "../context/portfolio";
 import useTypewriter from "../hooks/useTypewriter";
+import Magnetic from "../components/ui/Magnetic";
 
 const NeuralMesh = () => (
   <svg
@@ -57,10 +58,7 @@ const AboutMe = () => {
   const email = profile.socials?.mail || "mailto:vishalsingh31879@gmail.com";
   const github = profile.socials?.github || "#";
   const linkedin = profile.socials?.linkedin || "#";
-  const chips = profile.techChips?.length
-    ? profile.techChips
-    : ["PyTorch", "Next.js 15", "Neo4j", "Agentic AI", "RAG"];
-
+  const techChips = profile.techChips?.length ? profile.techChips : ["PyTorch", "Next.js 15", "Neo4j", "Agentic AI", "RAG"];
   const typedRole = useTypewriter(role);
 
   const stats = [
@@ -75,11 +73,13 @@ const AboutMe = () => {
     { label: "memory_alloc", value: "64%", width: 64 },
   ];
 
-  const hudChips = [
-    { text: "[pytorch:online]", top: "6%", left: "-2rem", delay: 0 },
-    { text: "[neural_sync 87%]", top: "38%", right: "-1.5rem", delay: 0.8 },
-    { text: "[rag:linked]", top: "70%", left: "-1.5rem", delay: 1.6 },
-  ];
+  const hudChips = techChips.map((chip, i) => ({
+    text: `[${chip.toLowerCase().replace(/\s+/g, "_")}:online]`,
+    top: `${6 + i * 32}%`,
+    left: i % 2 === 0 ? "-2rem" : undefined,
+    right: i % 2 === 1 ? "-1.5rem" : undefined,
+    delay: i * 0.6,
+  }));
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-36 pb-16 px-4 md:px-6 text-void dark:text-paper">
@@ -127,7 +127,7 @@ const AboutMe = () => {
           {/* TYPE-LED COLUMN */}
           <div className="lg:col-span-8 relative">
             {/* Floating HUD chips */}
-            {hudChips.map((chip, i) => (
+            {hudChips.map((chip) => (
               <span
                 key={chip.text}
                 className="floaty absolute hidden md:inline-block rounded-full border border-primary/25 bg-void/60 dark:bg-void/60 px-3 py-1 font-mono text-[9px] uppercase tracking-wider text-void/70 dark:text-paper/70"
@@ -178,10 +178,12 @@ const AboutMe = () => {
               className="enter-up-1 mt-9 flex flex-wrap items-center gap-4"
               style={{ animationDelay: "1.15s" }}
             >
-              <a href={email} className="btn-aurora group inline-flex items-center gap-2.5 rounded-full px-6 py-3 font-mono text-[11px] font-bold uppercase tracking-widest text-void dark:text-paper">
-                $ start_project --now
-                <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-              </a>
+              <Magnetic strength={0.25}>
+                <a href={email} className="btn-aurora group inline-flex items-center gap-2.5 rounded-full px-6 py-3 font-mono text-[11px] font-bold uppercase tracking-widest text-void dark:text-paper">
+                  $ start_project --now
+                  <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </Magnetic>
               <div className="flex items-center gap-2.5">
                 {[
                   { icon: <Github size={16} />, link: github, label: "github" },
@@ -268,6 +270,15 @@ const AboutMe = () => {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Scroll cue */}
+        <div className="hidden lg:flex flex-col items-center absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none" aria-hidden="true">
+          <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-primary/60 mb-2">$ scroll --down</p>
+          <svg className="cue-bob w-5 h-5 text-primary/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 5v14" />
+            <path d="M19 12l-7 7-7-7" />
+          </svg>
         </div>
       </div>
     </section>

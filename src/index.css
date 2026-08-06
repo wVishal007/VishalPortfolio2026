@@ -64,18 +64,6 @@ body {
   contain-intrinsic-size: auto 800px;
 }
 
-/* ============ TERMINAL PANELS ============ */
-.terminal-window {
-  background: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.06), 0 24px 60px rgba(5, 6, 10, 0.45);
-}
-
-.dark .terminal-window {
-  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.1), 0 0 32px rgba(34, 211, 238, 0.05),
-    0 24px 60px rgba(0, 0, 0, 0.55);
-}
-
 /* HUD corner brackets (top-left + bottom-right) */
 .hud-corners {
   position: relative;
@@ -137,6 +125,9 @@ body {
 /* ============ GLOW / SIGNAL ============ */
 .glow-cyan {
   box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.25), 0 0 22px rgba(34, 211, 238, 0.28);
+}
+.glow-shadow {
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.4), 0 6px 22px rgba(2, 6, 23, 0.4);
 }
 .glow-violet {
   box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.25), 0 0 22px rgba(139, 92, 246, 0.28);
@@ -207,8 +198,9 @@ body {
   position: absolute;
   border-radius: 9999px;
   pointer-events: none;
-  will-change: transform;
+  will-change: transform, translate;
   animation: orb-drift var(--dur, 26s) ease-in-out infinite alternate;
+  translate: var(--mx, 0) var(--my, 0);
 }
 @keyframes orb-drift {
   from { transform: translate3d(var(--ox, 0), var(--oy, 0), 0) scale(1); }
@@ -229,6 +221,112 @@ body {
     radial-gradient(46% 46% at 50% 82%, rgba(232, 121, 249, 0.12), transparent 66%);
 }
 
+/* ============ LIGHT MODE AURORA FIXES ============ */
+
+/* Aurora card — stronger border, readable shadow in light mode */
+:root:not(.dark) .aurora-card {
+  background:
+    linear-gradient(var(--panel-bg), var(--panel-bg)) padding-box,
+    linear-gradient(135deg, rgba(34, 211, 238, 0.65), rgba(139, 92, 246, 0.55) 50%, rgba(232, 121, 249, 0.65))
+      border-box;
+  box-shadow: 0 12px 40px rgba(5, 6, 14, 0.15), 0 4px 16px rgba(5, 6, 14, 0.08);
+}
+:root:not(.dark) .aurora-card::before {
+  background: linear-gradient(90deg, transparent, rgba(5, 6, 14, 0.25), transparent);
+}
+:root:not(.dark) .aurora-card::after {
+  background: radial-gradient(80% 45% at 50% 0%, rgba(34, 211, 238, 0.12), transparent 60%);
+}
+:root:not(.dark) .aurora-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.35),
+    0 16px 48px rgba(5, 6, 14, 0.18),
+    0 0 44px rgba(139, 92, 246, 0.25);
+}
+
+/* Aurora button — ensure readable text in light mode */
+:root:not(.dark) .btn-aurora {
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.25);
+}
+:root:not(.dark) .btn-aurora:hover {
+  box-shadow: 0 0 44px rgba(34, 211, 238, 0.3), 0 0 26px rgba(232, 121, 249, 0.2);
+}
+
+/* Text glows — darker, more readable shadows in light mode */
+:root:not(.dark) .text-glow-cyan {
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.7), 0 2px 8px rgba(5, 6, 14, 0.15);
+}
+:root:not(.dark) .text-glow-violet {
+  text-shadow: 0 0 12px rgba(139, 92, 246, 0.7), 0 2px 8px rgba(5, 6, 14, 0.15);
+}
+:root:not(.dark) .text-glow-magenta {
+  text-shadow: 0 0 14px rgba(232, 121, 249, 0.75), 0 2px 8px rgba(5, 6, 14, 0.15);
+}
+
+/* Serif accent — ensure gradient text is visible in light mode */
+:root:not(.dark) .serif-accent {
+  background: linear-gradient(110deg, #0891b2 0%, #7c3aed 50%, #c026d3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Gradient text aurora — light mode */
+:root:not(.dark) .gradient-text-aurora {
+  background: linear-gradient(110deg, #0891b2 0%, #7c3aed 48%, #c026d3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Aurora nebula backdrop — already has light mode */
+/* Cursor glow — already has light mode */
+
+/* Scanline — lighter in light mode */
+:root:not(.dark) .scanline {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(5, 6, 14, 0.02) 3px,
+    rgba(5, 6, 14, 0.02) 4px
+  );
+}
+
+/* Grid bg — lighter in light mode */
+:root:not(.dark) .grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+}
+
+/* Grain — lighter in light mode */
+:root:not(.dark) .grain {
+  opacity: 0.025;
+}
+
+/* Vignette — already has light mode */
+
+/* Marquee track border — lighter in light mode */
+:root:not(.dark) .marquee-track {
+  border-color: rgba(34, 211, 238, 0.12);
+}
+
+/* Hud rail EQ bars — use primary color */
+:root:not(.dark) .eq span {
+  background: var(--color-primary);
+}
+
+/* Reveal animations — ensure initial state works in light mode */
+:root:not(.dark) .reveal,
+:root:not(.dark) .reveal-stagger > * {
+  opacity: 0;
+}
+
+/* Particles — ensure visible in light mode */
+:root:not(.dark) .particle {
+  background: var(--color-primary);
+  opacity: 0;
+}
+
 /* Premium aurora card — gradient border + top highlight + inner glow */
 .aurora-card {
   position: relative;
@@ -239,6 +337,8 @@ body {
   border: 1px solid transparent;
   box-shadow: 0 24px 60px rgba(2, 6, 23, 0.55);
   transition: box-shadow 0.35s ease, transform 0.35s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 .aurora-card::before {
   content: "";
@@ -263,7 +363,37 @@ body {
     0 0 0 1px rgba(34, 211, 238, 0.2),
     0 24px 60px rgba(2, 6, 23, 0.6),
     0 0 44px rgba(139, 92, 246, 0.18);
-  transform: translateY(-3px);
+  transform: translateY(-3px) rotateX(2deg) rotateY(-2deg);
+}
+
+/* Card mouse spotlight — radial wash tracking cursor */
+.card-spot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    320px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(34, 211, 238, 0.12),
+    transparent 65%
+  );
+}
+.aurora-card:hover .card-spot {
+  opacity: 1;
+}
+:root:not(.dark) .card-spot {
+  background: radial-gradient(
+    320px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(5, 6, 14, 0.06),
+    transparent 65%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-spot {
+    display: none;
+  }
 }
 
 /* Aurora bloom button */
@@ -340,6 +470,33 @@ body {
 .boot-line {
   opacity: 0;
   animation: boot-fade 0.5s ease forwards;
+}
+
+/* Boot progress bar fill */
+@keyframes boot-progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+.boot-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-glow));
+  animation: boot-progress 1.6s ease forwards;
+}
+
+/* Hero scroll cue bob */
+@keyframes cue-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.cue-bob {
+  animation: cue-bob 1.8s ease-in-out infinite;
+}
+
+/* Focus-visible for keyboard accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
 }
 
 /* Neural SVG — flowing dashes + pulsing nodes */
@@ -716,10 +873,19 @@ body {
     animation: par-y linear both;
     animation-timeline: scroll();
   }
+  .parallax-hero {
+    animation: par-hero linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 50%;
+  }
 }
 @keyframes par-y {
   from { transform: translateY(0); }
   to { transform: translateY(-90px); }
+}
+@keyframes par-hero {
+  from { transform: translateY(0); }
+  to { transform: translateY(-60px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -747,6 +913,7 @@ body {
   .enter-portrait,
   .boot-sweep::after,
   .parallax-slow,
+  .parallax-hero,
   .reveal,
   .reveal-stagger > *,
   .aurora-orb {
@@ -769,6 +936,15 @@ body {
   .cursor-glow {
     display: none;
   }
+}
+
+/* Theme-switching cross-fade (temporary, applied via useTheme hook) */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, fill 0.35s ease, stroke 0.35s ease !important;
+  transition-delay: 0ms !important;
 }
 
 /* HIDE SCROLLBAR */

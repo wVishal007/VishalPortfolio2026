@@ -1,6 +1,27 @@
 import React from "react";
 import { Github, ArrowUpRight, ExternalLink } from "lucide-react";
 
+const getStatusConfig = (status, live) => {
+  const s = (status || (live && live !== "#" ? "deployed" : "local")).toLowerCase();
+  switch (s) {
+    case "deployed":
+    case "live":
+    case "production":
+      return { bg: "bg-accent/10", border: "border-accent/30", text: "text-accent", dot: "bg-accent", label: "deployed" };
+    case "staging":
+    case "preview":
+      return { bg: "bg-primary/10", border: "border-primary/30", text: "text-primary", dot: "bg-primary", label: "staging" };
+    case "archived":
+    case "deprecated":
+      return { bg: "bg-void/10 dark:bg-paper/10", border: "border-void/20 dark:border-paper/20", text: "text-void/50 dark:text-paper/50", dot: "bg-void/50 dark:bg-paper/50", label: "archived" };
+    case "local":
+    case "development":
+    case "dev":
+    default:
+      return { bg: "bg-amber-500/10", border: "border-amber-500/30", text: "text-amber-400", dot: "bg-amber-400", label: "local" };
+  }
+};
+
 const ProjectCard = ({
   title,
   description,
@@ -10,12 +31,12 @@ const ProjectCard = ({
   github,
   live,
   category,
+  status,
   index,
   onClick,
 }) => {
   const cardImage = coverImage || image;
-  const status = live && live !== "#" ? "deployed" : "local";
-  const statusColor = status === "deployed" ? "text-accent" : "text-amber-400";
+  const statusCfg = getStatusConfig(status, live);
   const files = 14 + (index ?? 0) * 3;
   const deps = 8 + (index ?? 0) * 2;
   const lines = ((index ?? 0) + 1) * 420;
@@ -25,6 +46,7 @@ const ProjectCard = ({
       onClick={() => onClick?.(index)}
       className="aurora-card group rounded-xl overflow-hidden cursor-pointer flex flex-col"
     >
+      <span className="card-spot" aria-hidden="true" />
       <div className="sheen duotone relative aspect-video overflow-hidden bg-surface">
         {cardImage ? (
           <img
@@ -45,11 +67,9 @@ const ProjectCard = ({
           <span className="rounded bg-void/70 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-primary">
             [{category || "project"}]
           </span>
-          <span
-            className={`rounded bg-void/70 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-widest flex items-center gap-1.5 ${statusColor}`}
-          >
-            <span className="pulse-dot h-1 w-1 rounded-full bg-current" />
-            {status}
+          <span className={`rounded ${statusCfg.bg} border ${statusCfg.border} px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-widest flex items-center gap-1.5 ${statusCfg.text}`}>
+            <span className={`pulse-dot h-1 w-1 rounded-full ${statusCfg.dot}`} />
+            {statusCfg.label}
           </span>
         </div>
         <span className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-void/60 backdrop-blur-sm text-paper opacity-0 group-hover:opacity-100 transition-opacity">
